@@ -1,1 +1,22 @@
-.grad
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# The throwaway server `./gradlew runServer` creates. Contains a downloaded Paper jar, worlds, and
+# the developer's own eula.txt — none of which belongs in the repository.
+plugin/run/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db

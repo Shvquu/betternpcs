@@ -499,6 +499,31 @@ public final class DefaultNpcManager implements NpcManager {
     }
 
     /**
+     * Looks an NPC up by name and returns the engine's own handle.
+     *
+     * <p>Same lookup as {@link #byName(String)}, typed for callers inside the plugin that need the
+     * engine-internal methods the public {@link Npc} interface deliberately does not expose.
+     *
+     * @param name the NPC's name, matched case insensitively
+     * @return the handle, or empty if no NPC has that name
+     * @throws NullPointerException if {@code name} is {@code null}
+     */
+    public Optional<NpcHandle> handleByName(String name) {
+        return services.registry().byName(name);
+    }
+
+    /**
+     * Returns every NPC as the engine's own handle.
+     *
+     * <p>Same set as {@link #all()}, typed for callers inside the plugin.
+     *
+     * @return an immutable snapshot
+     */
+    public Collection<NpcHandle> handles() {
+        return services.registry().all();
+    }
+
+    /**
      * Returns the names of every NPC, sorted, for tab completion.
      *
      * @param prefix the text typed so far, matched case insensitively

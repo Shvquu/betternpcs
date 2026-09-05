@@ -14,7 +14,14 @@ dependencies {
     compileOnly(libs.hikari)
     compileOnly(libs.sqlite.jdbc)
 
-    testImplementation(libs.paper.api)
+    // Integration tests run against a real SQLite file in a temporary folder — no mocking of JDBC,
+    // no external service. That is the only way to find out whether the SQL is actually valid.
     testImplementation(libs.hikari)
-    testRuntimeOnly(libs.sqlite.jdbc)
+    testImplementation(libs.sqlite.jdbc)
+
+    // Equipment serialisation goes through ItemStack.serializeAsBytes, which needs a server. See the
+    // note on `paperApiTest` in the version catalogue for why the tests use a newer API than the
+    // code is compiled against.
+    testImplementation(libs.paper.api.test)
+    testImplementation(libs.mockbukkit)
 }

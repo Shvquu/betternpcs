@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -150,6 +151,115 @@ class PackagedResourcesTest {
                             .contains("<" + placeholder + ">");
                 }
             }
+        }
+    }
+
+    @Nested
+    @DisplayName("permissions")
+    class PermissionsDeclared {
+
+        private static final String ADMIN = dev.shvquu.betternpcs.plugin.command.Permissions.ADMIN;
+
+        /**
+         * Reads the {@code permissions} block the way Paper does.
+         *
+         * <p>Deliberately not through {@link YamlConfiguration}: that splits keys on dots into nested
+         * sections, so {@code betternpcs.command.action.console} would appear to be a child of
+         * {@code betternpcs.command.action} rather than a sibling. Paper's plugin descriptor reads
+         * the raw YAML map, and so does this.
+         *
+         * @return the permission block, keyed by full node name
+         */
+        @SuppressWarnings("unchecked")
+        private Map<String, Map<String, Object>> permissionBlock() {
+            try (InputStream stream =
+                    PackagedResourcesTest.class.getResourceAsStream("/paper-plugin.yml")) {
+                assertThat(stream).as("packaged paper-plugin.yml").isNotNull();
+
+                Map<String, Object> root =
+                        new org.yaml.snakeyaml.Yaml().load(new InputStreamReader(stream, StandardCharsets.UTF_8));
+                Object permissions = root.get("permissions");
+
+                assertThat(permissions)
+                        .as("permissions block in paper-plugin.yml")
+                        .isInstanceOf(Map.class);
+                return (Map<String, Map<String, Object>>) permissions;
+            } catch (IOException failure) {
+                throw new AssertionError("paper-plugin.yml could not be read", failure);
+            }
+        }
+
+        /**
+         * Returns every permission node the code checks, read off the constants class.
+         *
+         * @return the nodes
+         */
+        private List<String> declaredInCode() {
+            return java.util.Arrays.stream(
+                            dev.shvquu.betternpcs.plugin.command.Permissions.class.getDeclaredFields())
+                    .filter(field -> field.getType() == String.class)
+                    .map(field -> {
+                        try {
+                            return (String) field.get(null);
+                        } catch (IllegalAccessException unreadable) {
+                            throw new AssertionError("Permissions constants must be public", unreadable);
+                        }
+                    })
+                    .toList();
+        }
+
+        @Test
+        void everyNodeTheCodeChecksIsDeclared() {
+            // An undeclared node still works, but it has no description and no documented default,
+            // so it appears nowhere a server owner would look. Declaring them is what turns the
+            // permission set into documentation rather than folklore.
+            assertThat(permissionBlock().keySet())
+                    .as("nodes declared in paper-plugin.yml")
+                    .containsAll(declaredInCode());
+        }
+
+        @Test
+        void declaresNothingTheCodeNeverChecks() {
+            // The other direction: a node left behind after a command was removed grants something
+            // that no longer exists, which is confusing at best.
+            assertThat(permissionBlock().keySet())
+                    .containsExactlyInAnyOrderElementsOf(declaredInCode());
+        }
+
+        @Test
+        void everyNodeIsGrantedByAdmin() {
+            Object children = permissionBlock().get(ADMIN).get("children");
+            assertThat(children).as("children of " + ADMIN).isInstanceOf(Map.class);
+
+            List<String> expected = declaredInCode().stream()
+                    .filter(node -> !node.equals(ADMIN))
+                    .toList();
+
+            // The whole promise of betternpcs.admin. A node added to the code but not to this list
+            // would leave an administrator holding "everything" and still being refused.
+            assertThat(((Map<?, ?>) children).keySet().stream().map(String::valueOf).toList())
+                    .containsExactlyInAnyOrderElementsOf(expected);
+        }
+
+        @Test
+        void nothingIsGrantedToEveryoneByDefault() {
+            permissionBlock().forEach((node, definition) ->
+                    assertThat(definition.get("default")).as("default of %s", node).isEqualTo("op"));
+        }
+
+        @Test
+        void consoleActionsAreNotImpliedByOrdinaryActionEditing() {
+            Map<String, Object> action =
+                    permissionBlock().get("betternpcs.command.action");
+
+            assertThat(action).as("betternpcs.command.action").isNotNull();
+
+            // A console action runs with full server permissions. Being trusted to edit an NPC's
+            // actions is not the same as being trusted with /op, and this is the check that stops
+            // someone from "tidying up" the permission tree into granting it.
+            assertThat(action.get("children"))
+                    .as("betternpcs.command.action must not imply any other node")
+                    .isNull();
         }
     }
 

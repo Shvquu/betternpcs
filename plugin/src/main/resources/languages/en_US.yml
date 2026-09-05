@@ -26,6 +26,9 @@ general:
   invalid-number: "<red>'<white><input></white>' is not a number."
   # <world>
   unknown-world: "<red>The world '<white><world></white>' is not loaded."
+  help-header: "<gray>BetterNPCs commands <dark_gray>(only the ones you may use)"
+  # <usage>
+  help-entry: "<dark_gray> <white><usage>"
   # <error>
   storage-error: "<red>The database request failed. See the console for details."
   # <count> <millis>

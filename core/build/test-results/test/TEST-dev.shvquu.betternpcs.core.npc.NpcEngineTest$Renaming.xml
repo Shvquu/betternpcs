@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="renaming" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:34.067Z" hostname="SUPERDUPERPC" time="0.006">
-  <properties/>
-  <testcase name="refusesANameAnotherNpcHas()" classname="dev.shvquu.betternpcs.core.npc.NpcEngineTest$Renaming" time="0.002"/>
-  <testcase name="allowsAChangeOfCapitalisation()" classname="dev.shvquu.betternpcs.core.npc.NpcEngineTest$Renaming" time="0.002"/>
-  <testcase name="movesTheNameIndex()" classname="dev.shvquu.betternpcs.core.npc.NpcEngineTest$Renaming" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

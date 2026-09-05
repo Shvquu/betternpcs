@@ -50,6 +50,14 @@ public enum Message {
     UNKNOWN_WORLD("general.unknown-world",
             "<red>The world '<white><world></white>' is not loaded."),
 
+    /** Header of the {@code /npc help} listing. Placeholders: none. */
+    HELP_HEADER("general.help-header",
+            "<gray>BetterNPCs commands <dark_gray>(only the ones you may use)"),
+
+    /** One line of the {@code /npc help} listing. Placeholders: {@code usage}. */
+    HELP_ENTRY("general.help-entry",
+            "<dark_gray> <white><usage>"),
+
     /** Shown when a storage operation failed. Placeholders: {@code error}. */
     STORAGE_ERROR("general.storage-error",
             "<red>The database request failed. See the console for details."),
