@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="validation" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:32.640Z" hostname="SUPERDUPERPC" time="0.007">
+  <properties/>
+  <testcase name="refusesAConnectionStringThatIsNotAMongoUri()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest$Validation" time="0.001"/>
+  <testcase name="doesNotRepeatTheConnectionStringInItsRejection()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest$Validation" time="0.001"/>
+  <testcase name="treatsANullPasswordAsNoPassword()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest$Validation" time="0.0"/>
+  <testcase name="refusesAPortOutsideTheUsableRange()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest$Validation" time="0.001"/>
+  <testcase name="refusesATimeoutHikariWouldRejectAnyway()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest$Validation" time="0.001"/>
+  <testcase name="copiesTheDriverProperties()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest$Validation" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

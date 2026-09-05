@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.shvquu.betternpcs.core.config.StorageSettingsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:32.587Z" hostname="SUPERDUPERPC" time="0.002">
+  <properties/>
+  <testcase name="classifiesEveryBackend()" classname="dev.shvquu.betternpcs.core.config.StorageSettingsTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

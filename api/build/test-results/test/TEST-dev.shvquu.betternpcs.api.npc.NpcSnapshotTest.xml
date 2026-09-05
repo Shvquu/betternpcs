@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-09-05T12:32:28.737Z" hostname="SUPERDUPERPC" time="0.697">
+  <properties/>
+  <testcase name="dropsInteractionsWhoseActionListIsEmpty()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.617"/>
+  <testcase name="keepsActionsInOrder()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.017"/>
+  <testcase name="rejectsABlankName()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.002"/>
+  <testcase name="roundTripsUnchangedThroughItsBuilder()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.015"/>
+  <testcase name="ordersMetadataDeterministically()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.002"/>
+  <testcase name="appliesSensibleDefaults()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.004"/>
+  <testcase name="exposesImmutableCollections()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.004"/>
+  <testcase name="rejectsABlankMetadataKey()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.002"/>
+  <testcase name="removesAMetadataEntrySetToNull()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.002"/>
+  <testcase name="reportsNoActionsForAnUnboundInteraction()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.005"/>
+  <testcase name="isNotAffectedByLaterBuilderChanges()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.0"/>
+  <testcase name="derivesACopyThatKeepsEverythingElse()" classname="dev.shvquu.betternpcs.api.npc.NpcSnapshotTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

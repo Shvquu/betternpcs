@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="rotation normalisation" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-09-05T12:32:29.555Z" hostname="SUPERDUPERPC" time="0.072">
+  <properties/>
+  <testcase name="collapsesNegativeZeroYaw()" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.002"/>
+  <testcase name="[1] input = &quot;90&quot;, expected = &quot;90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.017"/>
+  <testcase name="[2] input = &quot;120&quot;, expected = &quot;90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[3] input = &quot;-90&quot;, expected = &quot;-90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.0"/>
+  <testcase name="[4] input = &quot;-120&quot;, expected = &quot;-90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.003"/>
+  <testcase name="[5] input = &quot;45&quot;, expected = &quot;45&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="treatsAFullTurnAsNoTurnForEquality()" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[1] input = &quot;0&quot;, expected = &quot;0&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.002"/>
+  <testcase name="[2] input = &quot;90&quot;, expected = &quot;90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[3] input = &quot;180&quot;, expected = &quot;-180&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.0"/>
+  <testcase name="[4] input = &quot;270&quot;, expected = &quot;-90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[5] input = &quot;360&quot;, expected = &quot;0&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[6] input = &quot;450&quot;, expected = &quot;90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[7] input = &quot;-90&quot;, expected = &quot;-90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.0"/>
+  <testcase name="[8] input = &quot;-180&quot;, expected = &quot;-180&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[9] input = &quot;-270&quot;, expected = &quot;90&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <testcase name="[10] input = &quot;-360&quot;, expected = &quot;0&quot;" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$RotationNormalisation" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="equality" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:34.081Z" hostname="SUPERDUPERPC" time="0.0">
+  <properties/>
+  <testcase name="ignoresTheRawStringAndTrailingZeros()" classname="dev.shvquu.betternpcs.core.version.MinecraftVersionTest$Equality" time="0.0"/>
+  <testcase name="distinguishesDifferentVersions()" classname="dev.shvquu.betternpcs.core.version.MinecraftVersionTest$Equality" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

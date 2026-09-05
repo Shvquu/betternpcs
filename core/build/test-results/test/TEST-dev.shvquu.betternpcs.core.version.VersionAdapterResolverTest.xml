@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:34.083Z" hostname="SUPERDUPERPC" time="0.018">
+  <properties/>
+  <testcase name="[1] version = &quot;1.20.6&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.001"/>
+  <testcase name="[2] version = &quot;1.21.3&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[3] version = &quot;26.3&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.001"/>
+  <testcase name="[4] version = &quot;27.1&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[1] version = &quot;1.21.4&quot;, expectedModule = &quot;v1_21_4&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.001"/>
+  <testcase name="[2] version = &quot;1.21.5&quot;, expectedModule = &quot;v1_21_5&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.001"/>
+  <testcase name="[3] version = &quot;1.21.6&quot;, expectedModule = &quot;v1_21_8&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[4] version = &quot;1.21.7&quot;, expectedModule = &quot;v1_21_8&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[5] version = &quot;1.21.8&quot;, expectedModule = &quot;v1_21_8&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[6] version = &quot;1.21.9&quot;, expectedModule = &quot;v1_21_11&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[7] version = &quot;1.21.10&quot;, expectedModule = &quot;v1_21_11&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[8] version = &quot;1.21.11&quot;, expectedModule = &quot;v1_21_11&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[9] version = &quot;26.1&quot;, expectedModule = &quot;v26_1&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[10] version = &quot;26.1.2&quot;, expectedModule = &quot;v26_1&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="[11] version = &quot;26.2&quot;, expectedModule = &quot;v26_2&quot;" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <testcase name="registrationsAreOrderedAndDoNotOverlap()" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.001"/>
+  <testcase name="describesTheSupportedRangeForErrorMessages()" classname="dev.shvquu.betternpcs.core.version.VersionAdapterResolverTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

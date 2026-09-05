@@ -1,0 +1,11 @@
+name: BetterNPCsExample
+version: '${version}'
+main: dev.shvquu.betternpcs.example.ExamplePlugin
+api-version: '1.21'
+author: shvquu
+description: A worked example of integrating with the BetterNPCs API.
+
+# A hard dependency, not a soft one. BetterNPCs.get() is only guaranteed to work once BetterNPCs has
+# enabled, and 'depend' is what makes Bukkit load this plugin afterwards.
+depend:
+  - BetterNPCs

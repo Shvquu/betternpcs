@@ -1,0 +1,151 @@
+####################################################################################################
+# BetterNPCs — Français (fr_FR)
+#
+# Chaque valeur est du MiniMessage : https://docs.advntr.dev/minimessage/format.html
+#
+# Le texte entre chevrons comme <npc> est un espace réservé que BetterNPCs remplit. Ceux qu'accepte
+# chaque ligne sont indiqués au-dessus. Un espace réservé inconnu reste affiché tel quel plutôt que
+# d'être vidé : une faute de frappe se voit au lieu d'avaler une partie du message.
+#
+# Les valeurs sont toujours insérées en texte brut. Un joueur dont le pseudo ressemble à une balise
+# ne peut donc pas injecter de mise en forme ni de commande cliquable dans un message vu par
+# d'autres joueurs.
+#
+# Supprimer une ligne est sans risque : BetterNPCs utilise son texte anglais interne et le signale
+# une fois au démarrage.
+####################################################################################################
+
+prefix: "<gradient:#00c6ff:#0072ff><bold>BetterNPCs</bold></gradient> <dark_gray>»</dark_gray> "
+
+general:
+  # <permission>
+  no-permission: "<red>Tu n'as pas la permission de faire cela."
+  players-only: "<red>Seul un joueur peut exécuter cette commande."
+  # <input>
+  unknown-subcommand: "<red>Sous-commande inconnue '<white><input></white>'. Essaie <white>/npc help</white>."
+  # <input>
+  invalid-number: "<red>'<white><input></white>' n'est pas un nombre."
+  # <world>
+  unknown-world: "<red>Le monde '<white><world></white>' n'est pas chargé."
+  # <error>
+  storage-error: "<red>La requête à la base de données a échoué. Détails dans la console."
+  # <count> <millis>
+  reload-success: "<green><white><count></white> PNJ rechargés en <white><millis></white> ms."
+  # <error>
+  reload-failed: "<red>Le rechargement a échoué : <white><error></white>"
+
+npc:
+  # <npc> <type>
+  created: "<green>PNJ <white><npc></white> <gray>(<type>)</gray> créé."
+  # <npc>
+  deleted: "<green>PNJ <white><npc></white> supprimé."
+  # <npc>
+  delete-cancelled: "<red>Un autre plugin a empêché la suppression de <white><npc></white>."
+  # <npc>
+  not-found: "<red>Aucun PNJ ne s'appelle <white><npc></white>."
+  # <npc>
+  name-taken: "<red>Un PNJ nommé <white><npc></white> existe déjà."
+  # <npc>
+  name-invalid: "<red>'<white><npc></white>' n'est pas un nom de PNJ valide. Utilise des lettres, des chiffres, '_' et '-'."
+  no-target: "<red>Regarde un PNJ ou indique son nom."
+  # <npc>
+  spawned: "<green><white><npc></white> est apparu."
+  # <npc>
+  despawned: "<green><white><npc></white> a disparu."
+  # <npc>
+  already-spawned: "<yellow><npc> est déjà apparu."
+  # <npc>
+  already-despawned: "<yellow><npc> n'est pas apparu."
+  # <npc>
+  spawn-cancelled: "<red>Un autre plugin a empêché l'apparition de <white><npc></white>."
+  # <npc> <world> <x> <y> <z>
+  teleported: "<green><white><npc></white> déplacé vers <white><x>, <y>, <z></white> dans <white><world></white>."
+  # <npc>
+  teleported-to-you: "<green><white><npc></white> déplacé jusqu'à toi."
+  # <npc>
+  you-teleported: "<green>Tu as été téléporté vers <white><npc></white>."
+  # <old> <new>
+  renamed: "<green><white><old></white> renommé en <white><new></white>."
+  # <npc> <name>
+  display-name-set: "<green>Le nom affiché de <white><npc></white> est maintenant <reset><name></reset><green>."
+  # <npc>
+  display-name-cleared: "<green>Nom affiché de <white><npc></white> réinitialisé."
+  # <npc> <type>
+  type-set: "<green><npc> est maintenant un <white><type></white>."
+  # <input>
+  type-unknown: "<red>'<white><input></white>' n'est pas un type de PNJ valide."
+  # <npc>
+  saved: "<green><white><npc></white> enregistré."
+  # <count>
+  saved-all: "<green><white><count></white> PNJ enregistrés."
+
+  skin:
+    # <npc> <skin>
+    loading: "<gray>Récupération du skin de <white><skin></white> …"
+    # <npc> <skin>
+    set: "<green><npc> porte désormais le skin de <white><skin></white>."
+    # <npc>
+    cleared: "<green>Skin de <white><npc></white> retiré."
+    # <skin> <error>
+    failed: "<red>Impossible de récupérer le skin de <white><skin></white> : <white><error></white>"
+    # <skin>
+    not-found: "<red>Aucun skin trouvé pour <white><skin></white>."
+    # <npc>
+    only-player-npcs: "<red>Seuls les PNJ de type joueur ont un skin."
+
+  equipment:
+    # <npc> <slot> <item>
+    set: "<green><white><item></white> placé dans l'emplacement <white><slot></white> de <white><npc></white>."
+    # <npc> <slot>
+    cleared: "<green>Emplacement <white><slot></white> de <white><npc></white> vidé."
+    # <input>
+    slot-unknown: "<red>'<white><input></white>' n'est pas un emplacement d'équipement."
+    hold-item: "<red>Tiens en main l'objet que tu veux utiliser."
+
+  action:
+    # <npc> <interaction> <action>
+    added: "<green><white><action></white> ajoutée à <white><interaction></white> de <white><npc></white>."
+    # <npc> <interaction> <action>
+    removed: "<green><white><action></white> retirée de <white><npc></white>."
+    # <npc> <interaction> <count>
+    cleared: "<green><white><count></white> actions retirées de <white><npc></white>."
+    # <npc> <interaction>
+    list-header: "<gray>Actions de <white><npc></white> pour <white><interaction></white> :"
+    # <index> <action>
+    list-entry: "<dark_gray> <gray><index>. <white><action>"
+    # <npc> <interaction>
+    list-empty: "<gray><npc> n'a aucune action pour <white><interaction></white>."
+    # <type> <known>
+    type-unknown: "<red>Il n'existe aucune action nommée '<white><type></white>'. Connues : <white><known></white>"
+    # <action> <error>
+    invalid: "<red>Cette action est inutilisable : <white><error></white>"
+    # <index>
+    index-out-of-range: "<red>Il n'y a pas d'action numéro <white><index></white>."
+    console-denied: "<red>Tu ne peux pas ajouter d'actions console. Elles s'exécutent avec tous les droits du serveur."
+    # <input>
+    interaction-unknown: "<red>'<white><input></white>' n'est pas un type d'interaction."
+
+  list:
+    # <count> <page> <pages>
+    header: "<gray>PNJ <dark_gray>(<white><count></white>, page <white><page></white>/<white><pages></white>)"
+    # <npc> <type> <world> <state>
+    entry: "<dark_gray> <gray><npc> <dark_gray>· <gray><type> <dark_gray>· <gray><world> <dark_gray>· <state>"
+    empty: "<gray>Il n'y a encore aucun PNJ. Crées-en un avec <white>/npc create</white>."
+    # <page> <pages>
+    page-out-of-range: "<red>La page <white><page></white> n'existe pas ; il y en a <white><pages></white>."
+
+  info:
+    # <npc>
+    header: "<gray>PNJ <white><npc></white>"
+    # <key> <value>
+    line: "<dark_gray> <gray><key><dark_gray> : <white><value>"
+
+  state:
+    spawned: "<green>apparu"
+    despawned: "<gray>non apparu"
+
+startup:
+  # <version> <supported>
+  unsupported-version: "<red>Minecraft <white><version></white> n'est pas pris en charge. Cette version prend en charge <white><supported></white>."
+  # <current> <latest> <url>
+  update-available: "<yellow>BetterNPCs <white><latest></white> est disponible ; tu utilises <white><current></white>."

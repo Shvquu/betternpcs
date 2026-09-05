@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.shvquu.betternpcs.api.skin.SkinSourceTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-09-05T12:32:29.627Z" hostname="SUPERDUPERPC" time="0.04">
+  <properties/>
+  <testcase name="wrapsAnAlreadyResolvedTexture()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.005"/>
+  <testcase name="trimsAPlayerName()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.002"/>
+  <testcase name="refusesToRebuildATextureFromOneString()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.002"/>
+  <testcase name="namesAUniqueId()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.002"/>
+  <testcase name="namesAPlayer()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.0"/>
+  <testcase name="roundTripsANameThroughItsSerialisedForm()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.0"/>
+  <testcase name="roundTripsAUniqueIdThroughItsSerialisedForm()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.003"/>
+  <testcase name="[1] name = &quot;&quot;" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.003"/>
+  <testcase name="[2] name = &quot;   &quot;" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.002"/>
+  <testcase name="[3] name = &quot;a_name_that_is_far_too_long&quot;" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.001"/>
+  <testcase name="rejectsAMalformedUniqueId()" classname="dev.shvquu.betternpcs.api.skin.SkinSourceTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

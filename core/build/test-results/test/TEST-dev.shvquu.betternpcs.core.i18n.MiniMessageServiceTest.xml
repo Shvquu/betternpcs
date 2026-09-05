@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.shvquu.betternpcs.core.i18n.MiniMessageServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:32.662Z" hostname="SUPERDUPERPC" time="0.04">
+  <properties/>
+  <testcase name="writesPackagedLanguageFilesThatAreMissing()" classname="dev.shvquu.betternpcs.core.i18n.MiniMessageServiceTest" time="0.03"/>
+  <testcase name="doesNotOverwriteAnEditedLanguageFile()" classname="dev.shvquu.betternpcs.core.i18n.MiniMessageServiceTest" time="0.009"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/en_US.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/de_DE.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/es_ES.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/fr_FR.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager load
+WARNUNG: No language file 'en_US.yml' was found in C:\Users\kilia\AppData\Local\Temp\junit-7418619057702457606; using the built-in English texts.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/de_DE.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/es_ES.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/fr_FR.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager reportIncompleteTranslations
+WARNUNG: Language 'en_US' is missing 61 message(s) and falls back to English for them, for example: prefix, general.players-only, general.unknown-subcommand
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/en_US.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/de_DE.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/es_ES.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager writeMissingBundledFiles
+WARNUNG: The plugin jar has no packaged language file languages/fr_FR.yml.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager load
+WARNUNG: No language file 'en_US.yml' was found in C:\Users\kilia\AppData\Local\Temp\junit-1771445822000279700; using the built-in English texts.
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager reportIncompleteTranslations
+WARNUNG: Language 'de_DE' is missing 61 message(s) and falls back to English for them, for example: prefix, general.players-only, general.unknown-subcommand
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager reportIncompleteTranslations
+WARNUNG: Language 'en_US' is missing 61 message(s) and falls back to English for them, for example: prefix, general.players-only, general.unknown-subcommand
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager reportIncompleteTranslations
+WARNUNG: Language 'es_ES' is missing 61 message(s) and falls back to English for them, for example: prefix, general.players-only, general.unknown-subcommand
+Sept. 05, 2026 3:26:32 PM dev.shvquu.betternpcs.core.i18n.LanguageManager reportIncompleteTranslations
+WARNUNG: Language 'fr_FR' is missing 61 message(s) and falls back to English for them, for example: prefix, general.players-only, general.unknown-subcommand
+]]></system-err>
+</testsuite>

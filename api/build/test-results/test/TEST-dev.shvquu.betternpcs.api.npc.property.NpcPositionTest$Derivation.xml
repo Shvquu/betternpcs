@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="derivation" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-09-05T12:32:29.504Z" hostname="SUPERDUPERPC" time="0.011">
+  <properties/>
+  <testcase name="withWorldKeepsEverythingElse()" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$Derivation" time="0.004"/>
+  <testcase name="withCoordinatesKeepsWorldAndRotation()" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$Derivation" time="0.002"/>
+  <testcase name="withRotationKeepsCoordinates()" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$Derivation" time="0.0"/>
+  <testcase name="offsetAddsToEachAxis()" classname="dev.shvquu.betternpcs.api.npc.property.NpcPositionTest$Derivation" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

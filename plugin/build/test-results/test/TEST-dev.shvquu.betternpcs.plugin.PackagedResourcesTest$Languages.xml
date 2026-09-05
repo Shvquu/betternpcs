@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="language files" tests="20" skipped="0" failures="0" errors="0" timestamp="2026-09-05T13:26:30.076Z" hostname="SUPERDUPERPC" time="0.405">
+  <properties/>
+  <testcase name="[1] locale = &quot;en_US&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.02"/>
+  <testcase name="[2] locale = &quot;de_DE&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.005"/>
+  <testcase name="[3] locale = &quot;es_ES&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.003"/>
+  <testcase name="[4] locale = &quot;fr_FR&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.003"/>
+  <testcase name="[1] locale = &quot;en_US&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.006"/>
+  <testcase name="[2] locale = &quot;de_DE&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.004"/>
+  <testcase name="[3] locale = &quot;es_ES&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.004"/>
+  <testcase name="[4] locale = &quot;fr_FR&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.002"/>
+  <testcase name="[1] locale = &quot;en_US&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.024"/>
+  <testcase name="[2] locale = &quot;de_DE&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.005"/>
+  <testcase name="[3] locale = &quot;es_ES&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.006"/>
+  <testcase name="[4] locale = &quot;fr_FR&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.005"/>
+  <testcase name="[1] locale = &quot;en_US&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.124"/>
+  <testcase name="[2] locale = &quot;de_DE&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.029"/>
+  <testcase name="[3] locale = &quot;es_ES&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.045"/>
+  <testcase name="[4] locale = &quot;fr_FR&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.027"/>
+  <testcase name="[1] locale = &quot;en_US&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.001"/>
+  <testcase name="[2] locale = &quot;de_DE&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.002"/>
+  <testcase name="[3] locale = &quot;es_ES&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.002"/>
+  <testcase name="[4] locale = &quot;fr_FR&quot;" classname="dev.shvquu.betternpcs.plugin.PackagedResourcesTest$Languages" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

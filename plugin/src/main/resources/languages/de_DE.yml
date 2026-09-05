@@ -1,0 +1,152 @@
+####################################################################################################
+# BetterNPCs — Deutsch (de_DE)
+#
+# Jeder Wert ist MiniMessage: https://docs.advntr.dev/minimessage/format.html
+#
+# Text in spitzen Klammern wie <npc> ist ein Platzhalter, den BetterNPCs einsetzt. Welche eine Zeile
+# akzeptiert, steht jeweils darüber. Ein unbekannter Platzhalter bleibt als Text stehen, statt
+# geleert zu werden — ein Tippfehler ist dadurch sichtbar, statt still einen Teil der Nachricht zu
+# verschlucken.
+#
+# Platzhalterwerte werden immer als reiner Text eingefügt. Ein Spielername, der wie ein Tag aussieht,
+# kann also keine Formatierung und keinen anklickbaren Befehl in eine Nachricht einschleusen, die
+# andere Spieler sehen.
+#
+# Eine Zeile zu löschen ist ungefährlich: BetterNPCs fällt auf den eingebauten englischen Text
+# zurück und meldet das einmal beim Start.
+####################################################################################################
+
+prefix: "<gradient:#00c6ff:#0072ff><bold>BetterNPCs</bold></gradient> <dark_gray>»</dark_gray> "
+
+general:
+  # <permission>
+  no-permission: "<red>Dazu hast du keine Berechtigung."
+  players-only: "<red>Das kann nur ein Spieler ausführen."
+  # <input>
+  unknown-subcommand: "<red>Unbekannter Unterbefehl '<white><input></white>'. Versuch <white>/npc help</white>."
+  # <input>
+  invalid-number: "<red>'<white><input></white>' ist keine Zahl."
+  # <world>
+  unknown-world: "<red>Die Welt '<white><world></white>' ist nicht geladen."
+  # <error>
+  storage-error: "<red>Die Datenbankanfrage ist fehlgeschlagen. Details stehen in der Konsole."
+  # <count> <millis>
+  reload-success: "<green><white><count></white> NPCs in <white><millis></white> ms neu geladen."
+  # <error>
+  reload-failed: "<red>Neuladen fehlgeschlagen: <white><error></white>"
+
+npc:
+  # <npc> <type>
+  created: "<green>NPC <white><npc></white> <gray>(<type>)</gray> erstellt."
+  # <npc>
+  deleted: "<green>NPC <white><npc></white> gelöscht."
+  # <npc>
+  delete-cancelled: "<red>Ein anderes Plugin hat das Löschen von <white><npc></white> verhindert."
+  # <npc>
+  not-found: "<red>Es gibt keinen NPC namens <white><npc></white>."
+  # <npc>
+  name-taken: "<red>Ein NPC namens <white><npc></white> existiert bereits."
+  # <npc>
+  name-invalid: "<red>'<white><npc></white>' ist kein brauchbarer NPC-Name. Erlaubt sind Buchstaben, Ziffern, '_' und '-'."
+  no-target: "<red>Schau einen NPC an oder gib einen Namen an."
+  # <npc>
+  spawned: "<green><white><npc></white> gespawnt."
+  # <npc>
+  despawned: "<green><white><npc></white> entfernt."
+  # <npc>
+  already-spawned: "<yellow><npc> ist bereits gespawnt."
+  # <npc>
+  already-despawned: "<yellow><npc> ist nicht gespawnt."
+  # <npc>
+  spawn-cancelled: "<red>Ein anderes Plugin hat das Spawnen von <white><npc></white> verhindert."
+  # <npc> <world> <x> <y> <z>
+  teleported: "<green><white><npc></white> nach <white><x>, <y>, <z></white> in <white><world></white> verschoben."
+  # <npc>
+  teleported-to-you: "<green><white><npc></white> zu dir verschoben."
+  # <npc>
+  you-teleported: "<green>Du wurdest zu <white><npc></white> teleportiert."
+  # <old> <new>
+  renamed: "<green><white><old></white> in <white><new></white> umbenannt."
+  # <npc> <name>
+  display-name-set: "<green>Anzeigename von <white><npc></white> ist jetzt <reset><name></reset><green>."
+  # <npc>
+  display-name-cleared: "<green>Anzeigename von <white><npc></white> zurückgesetzt."
+  # <npc> <type>
+  type-set: "<green><npc> ist jetzt ein <white><type></white>."
+  # <input>
+  type-unknown: "<red>'<white><input></white>' ist kein brauchbarer NPC-Typ."
+  # <npc>
+  saved: "<green><white><npc></white> gespeichert."
+  # <count>
+  saved-all: "<green><white><count></white> NPCs gespeichert."
+
+  skin:
+    # <npc> <skin>
+    loading: "<gray>Skin von <white><skin></white> wird geladen …"
+    # <npc> <skin>
+    set: "<green><npc> trägt jetzt den Skin von <white><skin></white>."
+    # <npc>
+    cleared: "<green>Skin von <white><npc></white> entfernt."
+    # <skin> <error>
+    failed: "<red>Skin von <white><skin></white> konnte nicht geladen werden: <white><error></white>"
+    # <skin>
+    not-found: "<red>Für <white><skin></white> wurde kein Skin gefunden."
+    # <npc>
+    only-player-npcs: "<red>Nur Spieler-NPCs haben einen Skin."
+
+  equipment:
+    # <npc> <slot> <item>
+    set: "<green><white><item></white> in den Slot <white><slot></white> von <white><npc></white> gelegt."
+    # <npc> <slot>
+    cleared: "<green>Slot <white><slot></white> von <white><npc></white> geleert."
+    # <input>
+    slot-unknown: "<red>'<white><input></white>' ist kein Ausrüstungsslot."
+    hold-item: "<red>Halte den Gegenstand in der Hand, den du verwenden möchtest."
+
+  action:
+    # <npc> <interaction> <action>
+    added: "<green><white><action></white> zu <white><interaction></white> von <white><npc></white> hinzugefügt."
+    # <npc> <interaction> <action>
+    removed: "<green><white><action></white> von <white><npc></white> entfernt."
+    # <npc> <interaction> <count>
+    cleared: "<green><white><count></white> Aktionen von <white><npc></white> entfernt."
+    # <npc> <interaction>
+    list-header: "<gray>Aktionen von <white><npc></white> für <white><interaction></white>:"
+    # <index> <action>
+    list-entry: "<dark_gray> <gray><index>. <white><action>"
+    # <npc> <interaction>
+    list-empty: "<gray><npc> hat keine Aktionen für <white><interaction></white>."
+    # <type> <known>
+    type-unknown: "<red>Es gibt keine Aktion namens '<white><type></white>'. Bekannt: <white><known></white>"
+    # <action> <error>
+    invalid: "<red>Diese Aktion ist nicht verwendbar: <white><error></white>"
+    # <index>
+    index-out-of-range: "<red>Es gibt keine Aktion mit der Nummer <white><index></white>."
+    console-denied: "<red>Du darfst keine Konsolen-Aktionen anlegen. Sie laufen mit vollen Serverrechten."
+    # <input>
+    interaction-unknown: "<red>'<white><input></white>' ist kein Interaktionstyp."
+
+  list:
+    # <count> <page> <pages>
+    header: "<gray>NPCs <dark_gray>(<white><count></white>, Seite <white><page></white>/<white><pages></white>)"
+    # <npc> <type> <world> <state>
+    entry: "<dark_gray> <gray><npc> <dark_gray>· <gray><type> <dark_gray>· <gray><world> <dark_gray>· <state>"
+    empty: "<gray>Es gibt noch keine NPCs. Erstelle einen mit <white>/npc create</white>."
+    # <page> <pages>
+    page-out-of-range: "<red>Seite <white><page></white> gibt es nicht; es sind <white><pages></white>."
+
+  info:
+    # <npc>
+    header: "<gray>NPC <white><npc></white>"
+    # <key> <value>
+    line: "<dark_gray> <gray><key><dark_gray>: <white><value>"
+
+  state:
+    spawned: "<green>gespawnt"
+    despawned: "<gray>nicht gespawnt"
+
+startup:
+  # <version> <supported>
+  unsupported-version: "<red>Minecraft <white><version></white> wird nicht unterstützt. Dieser Build unterstützt <white><supported></white>."
+  # <current> <latest> <url>
+  update-available: "<yellow>BetterNPCs <white><latest></white> ist erschienen; du nutzt <white><current></white>."

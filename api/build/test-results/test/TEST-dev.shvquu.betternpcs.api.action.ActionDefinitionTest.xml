@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-09-05T12:32:28.660Z" hostname="SUPERDUPERPC" time="0.072">
+  <properties/>
+  <testcase name="rejectsALineWithoutAColon()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.003"/>
+  <testcase name="roundTripsAnEmptyArgument()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.002"/>
+  <testcase name="roundTripsThroughSerialisation()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.006"/>
+  <testcase name="trimsSurroundingWhitespace()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.007"/>
+  <testcase name="normalisesTheTypeToLowerCase()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.001"/>
+  <testcase name="splitsOnTheFirstColonOnly()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.007"/>
+  <testcase name="[1] type = &quot;&quot;" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.003"/>
+  <testcase name="[2] type = &quot;   &quot;" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.003"/>
+  <testcase name="[3] type = &quot;with space&quot;" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.002"/>
+  <testcase name="[4] type = &quot;with:colon&quot;" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.001"/>
+  <testcase name="parsesTypeAndArgument()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.003"/>
+  <testcase name="acceptsAnEmptyArgument()" classname="dev.shvquu.betternpcs.api.action.ActionDefinitionTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

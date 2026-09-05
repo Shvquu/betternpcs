@@ -1,0 +1,126 @@
+####################################################################################################
+#  BetterNPCs
+#
+#  Every setting below is optional. A missing one falls back to the value shown here, which is what
+#  lets this file survive an update that adds new settings. A setting that is present but unusable
+#  is refused at startup with the exact path named, rather than silently ignored.
+#
+#  Commands:    /npc help
+#  Permissions: see PERMISSIONS.md
+####################################################################################################
+
+plugin:
+  # Logs detail that is only useful while diagnosing a problem: every packet batch, every visibility
+  # decision, every storage round trip. Very noisy on a busy server — leave it off unless asked for
+  # it in a bug report.
+  debug: false
+
+  # Submits anonymous usage statistics: NPC count, plugin version, Minecraft version, storage type.
+  # No player data, no IP addresses, no world or NPC names.
+  metrics: true
+
+storage:
+  # SQLITE, MYSQL, MARIADB, POSTGRESQL or MONGODB.
+  #
+  # SQLite needs no setup and handles thousands of NPCs perfectly well. Move to one of the others
+  # only when several servers have to share the same NPCs — that is the one thing SQLite cannot do.
+  type: SQLITE
+
+  sqlite:
+    # A plain file name inside the plugin folder. Paths are refused.
+    file: npcs.db
+
+  # Also used for MariaDB: the two differ only in the driver, not in these settings.
+  mysql:
+    host: localhost
+    port: 3306
+    database: betternpcs
+    username: root
+    password: ""
+    # Connections held open. More is not faster: a pool larger than the database's own thread count
+    # just moves the queue. Ten is right for almost every server.
+    pool-size: 10
+    # Milliseconds to wait for a free connection before giving up.
+    connection-timeout: 10000
+    # Passed straight to the JDBC driver. Rarely needed, and empty on purpose: shipping
+    # `useSSL: "false"` here would silently turn off transport encryption to the database for every
+    # server that never read this far.
+    #
+    #   properties:
+    #     useSSL: "true"
+    #     characterEncoding: "utf8"
+    properties: {}
+
+  postgresql:
+    host: localhost
+    port: 5432
+    database: betternpcs
+    username: postgres
+    password: ""
+    pool-size: 10
+    connection-timeout: 10000
+    properties: {}
+
+  mongodb:
+    # May contain credentials, and is never written to the log.
+    connection-string: "mongodb://localhost:27017"
+    database: betternpcs
+
+npc:
+  # How far away an NPC is rendered, in blocks, unless the NPC overrides it.
+  #
+  # This is the single biggest lever on performance: tracking cost grows with the number of players
+  # multiplied by the number of NPCs near each of them, and this bounds the second factor. Lowering
+  # it from 48 to 32 removes more than half the work.
+  default-view-distance: 32
+
+  # Ticks between visibility passes. 1 is the smoothest and the most expensive; 2 is visually
+  # identical for a walking player and costs half as much. Raise it to 4 on a server with thousands
+  # of NPCs — the only visible effect is that an NPC appears a fraction of a second later.
+  tracker-interval: 2
+
+  # Seconds between writes of NPCs that have changed. 0 disables periodic saving, leaving writes to
+  # shutdown and to explicit /npc save; that is faster but loses changes if the server crashes.
+  save-interval: 300
+
+  # Milliseconds after an accepted interaction during which further clicks from the same player on
+  # the same NPC are ignored. Clients send one packet per click, so without this a held mouse button
+  # runs an NPC's actions a dozen times a second.
+  interaction-cooldown: 250
+
+  # Renders NPCs as packets rather than as real server entities. Packet NPCs cost the server almost
+  # nothing when nobody is near them, which is what makes thousands of them viable. Turning this off
+  # is only useful when another plugin needs to see NPCs as entities.
+  use-packets: true
+
+  # The most NPCs one player is sent at a time. A safety limit for a player standing in the middle
+  # of a hub full of NPCs; the nearest are kept.
+  max-tracked-per-player: 200
+
+  # Caches resolved skins so that a restart does not re-fetch every one of them from Mojang.
+  cache-skins: true
+
+  # Seconds a cached skin stays valid. A day is a reasonable compromise: long enough to avoid
+  # hammering Mojang, short enough that a changed skin appears without a restart.
+  skin-cache-duration: 3600
+
+  # Milliseconds a skin lookup may take before it is abandoned. The NPC then keeps whatever skin it
+  # last had rather than reverting to the default.
+  skin-request-timeout: 5000
+
+language:
+  # The language file to use, from the languages/ folder. Shipped: en_US, de_DE, es_ES, fr_FR.
+  #
+  # Files in that folder are yours to edit: BetterNPCs writes the shipped ones only when they are
+  # missing, and never overwrites them. Adding another language is a matter of copying a file.
+  default: en_US
+
+  # Serves each player the language their client is set to, falling back to the default above when
+  # no file matches. The console always uses the default.
+  follow-client-locale: false
+
+updates:
+  # Checks once at startup whether a newer release exists and writes a line to the console if so.
+  # BetterNPCs never downloads or installs anything: a plugin that replaces itself is a plugin that
+  # can break a server while nobody is watching.
+  check: true
