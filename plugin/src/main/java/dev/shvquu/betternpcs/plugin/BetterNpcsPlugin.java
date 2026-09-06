@@ -38,6 +38,8 @@ import dev.shvquu.betternpcs.core.version.MinecraftVersion;
 import dev.shvquu.betternpcs.core.version.UnsupportedMinecraftVersionException;
 import dev.shvquu.betternpcs.core.version.VersionAdapter;
 import dev.shvquu.betternpcs.core.version.VersionAdapterResolver;
+import dev.shvquu.betternpcs.core.backup.BackupService;
+import dev.shvquu.betternpcs.core.backup.RestoreService;
 import dev.shvquu.betternpcs.plugin.command.NpcCommands;
 import dev.shvquu.betternpcs.storage.mongodb.MongoRepositoryFactory;
 import dev.shvquu.betternpcs.storage.sql.SqlRepositoryFactory;
@@ -351,8 +353,14 @@ public final class BetterNpcsPlugin extends JavaPlugin {
     }
 
     private void registerCommands() {
+        // Under the data folder rather than beside the world, so that a server owner who copies
+        // plugins/BetterNPCs takes the backups with them.
+        BackupService backups = new BackupService(
+                getDataFolder().toPath().resolve("backups"), getPluginMeta().getVersion());
+
         NpcCommands commands = new NpcCommands(
-                npcManager, messages, services.scheduler(), services.actions(), this::reloadSettings);
+                npcManager, messages, services.scheduler(), services.actions(),
+                backups, new RestoreService(npcManager, getLogger()), this::reloadSettings);
 
         // Registered through the lifecycle event because a plugin described by paper-plugin.yml has
         // no commands block. Paper fires this once during enable, and commands registered here are
