@@ -23,7 +23,7 @@ javaToolchainDefault = "21"
 javaToolchainModern = "25"
 
 # --- Build plugins --------------------------------------------------------------------------------
-paperweight = "2.0.0-beta.23"
+paperweight = "2.0.0-SNAPSHOT"
 shadow = "9.6.1"
 runPaper = "3.1.0"
 foojay = "1.0.0"
