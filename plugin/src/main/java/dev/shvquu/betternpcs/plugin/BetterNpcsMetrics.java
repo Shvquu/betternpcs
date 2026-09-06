@@ -42,7 +42,7 @@ final class BetterNpcsMetrics {
      * configuration — submitting to a project that does not exist would be pointless traffic from
      * every server running this build.
      */
-    private static final int PLUGIN_ID = 0;
+    private static final int PLUGIN_ID = 33885;
 
     private BetterNpcsMetrics() {
         throw new AssertionError("No instances");
