@@ -32,6 +32,8 @@ import dev.shvquu.betternpcs.core.skin.MojangSkinProvider;
 import dev.shvquu.betternpcs.core.skin.SkinCache;
 import dev.shvquu.betternpcs.core.storage.InMemoryNpcRepository;
 import dev.shvquu.betternpcs.core.storage.NpcRepository;
+import dev.shvquu.betternpcs.core.update.PluginVersion;
+import dev.shvquu.betternpcs.core.update.UpdateChecker;
 import dev.shvquu.betternpcs.core.version.MinecraftVersion;
 import dev.shvquu.betternpcs.core.version.UnsupportedMinecraftVersionException;
 import dev.shvquu.betternpcs.core.version.VersionAdapter;
@@ -71,6 +73,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @since 1.0.0
  */
 public final class BetterNpcsPlugin extends JavaPlugin {
+
+    /** Where the update check looks for releases. */
+    private static final String UPDATE_REPOSITORY = "Shvquu/betternpcs";
 
     private BetterNpcsConfig configuration;
     private LanguageManager languages;
@@ -125,6 +130,7 @@ public final class BetterNpcsPlugin extends JavaPlugin {
 
         StartupBanner.render(bannerDetails(minecraft)).forEach(getLogger()::info);
         logRegisteredPermissions();
+        checkForUpdates();
 
         loadNpcs();
         startTasks();
@@ -449,6 +455,43 @@ public final class BetterNpcsPlugin extends JavaPlugin {
             getLogger().info(() -> "  " + node + " (" + (permission == null
                     ? "?" : permission.getDefault()) + ")" + children);
         });
+    }
+
+    /**
+     * Looks for a newer release, if the server owner asked for it.
+     *
+     * <p>Nothing is downloaded and nothing is replaced — the result is one line in the console with
+     * a version and a link. A plugin that updates itself is a plugin that can break a server while
+     * nobody is watching.
+     *
+     * <p>Runs off the main thread and stays silent about its own failures unless debug logging is
+     * on: plenty of servers have no outbound internet, and a warning on every start for an optional
+     * convenience feature trains people to ignore the log.
+     */
+    private void checkForUpdates() {
+        if (!configuration.updates().check()) {
+            return;
+        }
+
+        PluginVersion current = PluginVersion.parse(getPluginMeta().getVersion()).orElse(null);
+        if (current == null) {
+            // A fork with a version this build cannot read. Nothing sensible to compare against.
+            return;
+        }
+
+        UpdateChecker checker = new UpdateChecker(
+                UPDATE_REPOSITORY,
+                Duration.ofSeconds(10),
+                task -> services.scheduler().runAsync(task),
+                getLogger(),
+                configuration.plugin().debug());
+
+        checker.check(current).thenAccept(release -> release.ifPresent(found ->
+                getServer().getConsoleSender().sendMessage(messages.render(
+                        Message.UPDATE_AVAILABLE,
+                        Placeholders.text("current", current.toString()),
+                        Placeholders.text("latest", found.version().toString()),
+                        Placeholders.text("url", found.url())))));
     }
 
     private StartupBanner.Details bannerDetails(MinecraftVersion minecraft) {

@@ -290,7 +290,8 @@ public enum Message {
 
     /** Placeholders: {@code current}, {@code latest}, {@code url}. */
     UPDATE_AVAILABLE("startup.update-available",
-            "<yellow>BetterNPCs <white><latest></white> is out; you are running <white><current></white>.");
+            "<yellow>BetterNPCs <white><latest></white> is out; you are running <white><current></white>. "
+                    + "Download: <white><url></white>");
 
     private static final Map<String, Message> BY_KEY = index();
 

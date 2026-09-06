@@ -151,4 +151,4 @@ startup:
   # <version> <supported>
   unsupported-version: "<red>Minecraft <white><version></white> no es compatible. Esta versión admite <white><supported></white>."
   # <current> <latest> <url>
-  update-available: "<yellow>Ya está disponible BetterNPCs <white><latest></white>; estás usando <white><current></white>."
+  update-available: "<yellow>Ya está disponible BetterNPCs <white><latest></white>; estás usando <white><current></white>. Descarga: <white><url></white>"
