@@ -1,0 +1,21 @@
+# Blank issues are disabled on purpose. The two templates ask for the things that turn a report into
+# something actionable — chiefly the startup banner — and a blank issue reliably arrives without
+# them, costing everyone a round trip.
+blank_issues_enabled: false
+
+contact_links:
+  - name: Question or help
+    url: https://github.com/Shvquu/betternpcs/discussions
+    about: >-
+      "How do I…" belongs in Discussions rather than in an issue. Issues are for defects and
+      feature requests.
+
+  - name: Documentation
+    url: https://github.com/Shvquu/betternpcs/tree/main/docs
+    about: Configuration, commands, permissions, storage and the API are documented here.
+
+  - name: Security vulnerability
+    url: https://github.com/Shvquu/betternpcs/security/advisories/new
+    about: >-
+      Please report privately rather than in a public issue, so a fix can be released before the
+      details are known.

@@ -1,0 +1,67 @@
+name: Feature request
+description: Something BetterNPCs should be able to do and cannot.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the **problem** before the solution. Knowing what you are actually trying to
+        build often turns up an answer that is simpler than the feature you had in mind — and when
+        it does not, it makes the feature a better one.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: >-
+        The situation on your server, not the API you would like. What are you building, and where
+        does BetterNPCs stop you?
+      placeholder: >-
+        I want an NPC that only appears to players who have finished a quest, and disappears again
+        when they start the next one.
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: What are you doing at the moment?
+      description: >-
+        Whatever you have tried, including things that did not work. If you found a workaround,
+        knowing how awkward it is tells us how much the feature is worth.
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like BetterNPCs to do?
+      description: >-
+        A command, a configuration setting, an API method — whatever shape you imagine. A rough idea
+        is fine; you are not expected to design it.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of the plugin?
+      multiple: true
+      options:
+        - NPC appearance (skins, equipment, nametags, holograms)
+
+        - NPC behaviour (look tracking, movement, animations)
+        - Interactions and actions
+        - Visibility rules
+        - Commands
+        - Storage
+        - Public API
+        - Localisation
+        - Something else
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and did not find this request.
+          required: true
+        - label: >-
+            I checked the documentation in docs/ and this is not already possible.
+          required: true

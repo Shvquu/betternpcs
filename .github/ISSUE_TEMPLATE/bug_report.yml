@@ -1,0 +1,97 @@
+name: Bug report
+description: Something does not work the way it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this.
+
+        The single most useful thing you can give us is the **startup banner** BetterNPCs prints to
+        the console. It answers most of the questions we would otherwise have to ask you one at a
+        time: plugin version, API version, Minecraft version, server build, which version adapter
+        loaded, Java version, storage backend and whether debug logging is on.
+
+  - type: textarea
+    id: banner
+    attributes:
+      label: Startup banner
+      description: >-
+        The block BetterNPCs logs when the server starts. Search your log for "BetterNPCs" and copy
+        the framed box.
+      render: text
+      placeholder: |
+        +-----------------------------------------------------+
+        |  BetterNPCs 1.0.0                                   |
+        |  API:        1.0.0                                  |
+        |  Minecraft:  1.21.4                                 |
+        |  Server:     Paper 1.21.4-232                       |
+        |  Adapter:    Paper 1.21.4 (Mojang-mapped)           |
+        |  Java:       21.0.12                                |
+        |  Storage:    SQLITE -> npcs.db                      |
+        |  Language:   en_US                                  |
+        |  Debug:      off                                    |
+        +-----------------------------------------------------+
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happens
+    attributes:
+      label: What happens
+      description: What you see, as precisely as you can put it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-should-happen
+    attributes:
+      label: What should happen instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: >-
+        The exact commands, in order. If it involves a particular NPC, the output of
+        `/npc info <name>` is worth more than a description of it.
+      placeholder: |
+        1. /npc create shopkeeper
+        2. /npc skin shopkeeper Notch
+        3. Walk 40 blocks away and back
+        4. The NPC is now invisible
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console output
+      description: >-
+        Any errors or stack traces. If there are none, please say so — "no errors in the console" is
+        itself useful information.
+
+        Turning on `plugin.debug` in config.yml and reproducing the problem gives us considerably
+        more to work with.
+      render: text
+
+  - type: input
+    id: other-plugins
+    attributes:
+      label: Other NPC or protocol plugins installed
+      description: >-
+        Citizens, FancyNPCs, ProtocolLib, ViaVersion, packet-level anticheats — anything that also
+        touches entities or connections. These are where interference usually comes from.
+      placeholder: ViaVersion 5.x, ProtocolLib 5.x
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Before submitting
+      options:
+        - label: I am running a supported Minecraft version (1.21.4 through 26.2).
+          required: true
+        - label: I searched the existing issues and did not find this one.
+          required: true
