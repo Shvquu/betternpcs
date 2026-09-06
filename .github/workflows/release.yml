@@ -46,7 +46,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Cache remapped server jars
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: versions/*/.gradle/caches/paperweight
           key: paperweight-${{ runner.os }}-${{ hashFiles('versions/*/build.gradle.kts') }}
