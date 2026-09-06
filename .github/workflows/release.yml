@@ -94,7 +94,7 @@ jobs:
         run: ./gradlew :api:publish "-Pversion=$VERSION"
 
       - name: Create the release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: BetterNPCs ${{ steps.version.outputs.version }}
           tag_name: v${{ steps.version.outputs.version }}
