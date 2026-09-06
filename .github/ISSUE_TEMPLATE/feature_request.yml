@@ -45,7 +45,6 @@ body:
       multiple: true
       options:
         - NPC appearance (skins, equipment, nametags, holograms)
-
         - NPC behaviour (look tracking, movement, animations)
         - Interactions and actions
         - Visibility rules
