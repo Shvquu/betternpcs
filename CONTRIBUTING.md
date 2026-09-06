@@ -108,6 +108,26 @@ drift apart silently otherwise.
 and refuses to start against another. Bumping either alone red-builds every engine test. Dependabot
 is configured not to try.
 
+## If you contribute from Windows
+
+Windows filesystems do not carry a Unix executable bit, so a shell script committed from Windows
+arrives in git as mode `100644`. Everything works locally, and then CI fails with
+`./gradlew: Permission denied` and exit code 126 — or a Linux contributor cannot run
+`tools/sync-adapters.sh`.
+
+When you add or restore an executable file, set the bit in the index by hand:
+
+```bash
+git update-index --chmod=+x path/to/script.sh
+```
+
+To check what is tracked:
+
+```bash
+git ls-files -s | grep -E '\.(sh|bash)$'   # 100755 is executable, 100644 is not
+git ls-files -s gradlew
+```
+
 ## Code conventions
 
 The codebase has a particular commenting style, and matching it is the main thing that makes a
