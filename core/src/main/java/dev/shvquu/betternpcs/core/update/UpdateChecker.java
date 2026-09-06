@@ -175,6 +175,7 @@ public final class UpdateChecker {
 
         if (status == 404) {
             // No release has been published yet. Not a failure — it is simply the answer.
+            report("no release has been published yet", null);
             return Optional.empty();
         }
         if (status != 200) {
@@ -201,6 +202,9 @@ public final class UpdateChecker {
             return Optional.empty();
         }
         if (!current.isOlderThan(latest.get())) {
+            // Logged so that, with debug on, the check is observable either way. Silence that could
+            // equally mean "up to date" or "never ran" is not a useful diagnostic.
+            report("up to date (latest release is " + latest.get() + ")", null);
             return Optional.empty();
         }
 
