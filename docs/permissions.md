@@ -1,6 +1,6 @@
 # Permissions
 
-Fourteen nodes, **all defaulting to operator**. A fresh install grants ordinary players nothing.
+Sixteen nodes, **all defaulting to operator**. A fresh install grants ordinary players nothing.
 
 They are declared in `paper-plugin.yml`, so they show up in permission plugins with descriptions
 rather than having to be typed from memory.
@@ -23,6 +23,8 @@ rather than having to be typed from memory.
 | `betternpcs.command.action.console` | Adding `console:` actions |
 | `betternpcs.command.reload` | `/npc reload` |
 | `betternpcs.command.save` | `/npc save` |
+| `betternpcs.command.backup` | `/npc backup` |
+| `betternpcs.command.restore` | `/npc restore` |
 
 ## Two things worth knowing
 
@@ -97,7 +99,7 @@ With `plugin.debug` on, BetterNPCs logs every permission node the **server** act
 with its default and its children, at startup:
 
 ```
-[BetterNPCs] Registered 14 permission node(s):
+[BetterNPCs] Registered 16 permission node(s):
 [BetterNPCs]   betternpcs.admin (op) -> betternpcs.command, betternpcs.command.create, ...
 [BetterNPCs]   betternpcs.command (op)
 [BetterNPCs]   betternpcs.command.action (op)

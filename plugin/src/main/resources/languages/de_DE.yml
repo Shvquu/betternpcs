@@ -148,6 +148,39 @@ npc:
     spawned: "<green>gespawnt"
     despawned: "<gray>nicht gespawnt"
 
+backup:
+  # <count> <file>
+  created: "<green><white><count></white> NPCs wurden nach <white><file></white> gesichert."
+  # <error>
+  failed: "<red>Die Sicherung konnte nicht geschrieben werden: <white><error></white>"
+  # <input>
+  name-invalid: "<red>'<white><input></white>' ist kein zulässiger Name für eine Sicherung. Erlaubt sind Buchstaben, Ziffern, <white>.</white>, <white>-</white> und <white>_</white>."
+  # <count>
+  list-header: "<gray>Sicherungen <dark_gray>(<white><count></white>, neueste zuerst)"
+  # <file>
+  list-entry: "<dark_gray> <gray><file>"
+  list-empty: "<gray>Es gibt noch keine Sicherungen. Erstelle eine mit <white>/npc backup</white>."
+  # <file>
+  not-found: "<red>Es gibt keine Sicherung namens <white><file></white>."
+  # <file> <error>
+  unreadable: "<red><white><file></white> konnte nicht gelesen werden: <white><error></white>"
+
+  restore:
+    # <file> <created> <overwritten> <blocked>
+    plan-header: "<gray>Das Wiederherstellen von <white><file></white> würde <white><created></white> NPCs erstellen, <white><overwritten></white> überschreiben und <white><blocked></white> überspringen."
+    # <npc>
+    blocked-name-taken: "<dark_gray> <yellow><npc> <gray>· ein anderer NPC nutzt diesen Namen bereits"
+    # <npc>
+    blocked-unusable: "<dark_gray> <yellow><npc> <gray>· das ist kein zulässiger NPC-Name"
+    # <count>
+    plan-replace-hint: "<gray><white><count></white> NPCs gibt es bereits und sie bleiben unverändert. Nutze <white>--replace</white>, um sie zu überschreiben."
+    plan-confirm-hint: "<gray>Bisher wurde nichts geändert. Führe denselben Befehl mit <white>--confirm</white> aus, um ihn anzuwenden."
+    plan-no-changes: "<gray>Diese Sicherung wiederherzustellen würde nichts ändern."
+    # <created> <overwritten>
+    done: "<green><white><created></white> neue und <white><overwritten></white> bestehende NPCs wiederhergestellt."
+    # <count>
+    partial: "<yellow><count></yellow> NPCs konnten nicht wiederhergestellt werden; siehe Server-Log."
+
 startup:
   # <version> <supported>
   unsupported-version: "<red>Minecraft <white><version></white> wird nicht unterstützt. Dieser Build unterstützt <white><supported></white>."

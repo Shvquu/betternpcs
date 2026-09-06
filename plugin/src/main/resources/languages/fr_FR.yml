@@ -147,6 +147,39 @@ npc:
     spawned: "<green>apparu"
     despawned: "<gray>non apparu"
 
+backup:
+  # <count> <file>
+  created: "<green><white><count></white> PNJ ont été sauvegardés dans <white><file></white>."
+  # <error>
+  failed: "<red>La sauvegarde n'a pas pu être écrite : <white><error></white>"
+  # <input>
+  name-invalid: "<red>'<white><input></white>' n'est pas un nom de sauvegarde valide. Utilise des lettres, des chiffres, <white>.</white>, <white>-</white> et <white>_</white>."
+  # <count>
+  list-header: "<gray>Sauvegardes <dark_gray>(<white><count></white>, la plus récente en premier)"
+  # <file>
+  list-entry: "<dark_gray> <gray><file>"
+  list-empty: "<gray>Il n'y a pas encore de sauvegarde. Crées-en une avec <white>/npc backup</white>."
+  # <file>
+  not-found: "<red>Il n'existe aucune sauvegarde nommée <white><file></white>."
+  # <file> <error>
+  unreadable: "<red><white><file></white> n'a pas pu être lu : <white><error></white>"
+
+  restore:
+    # <file> <created> <overwritten> <blocked>
+    plan-header: "<gray>Restaurer <white><file></white> créerait <white><created></white> PNJ, en écraserait <white><overwritten></white> et en ignorerait <white><blocked></white>."
+    # <npc>
+    blocked-name-taken: "<dark_gray> <yellow><npc> <gray>· un autre PNJ utilise déjà ce nom"
+    # <npc>
+    blocked-unusable: "<dark_gray> <yellow><npc> <gray>· ce n'est pas un nom de PNJ valide"
+    # <count>
+    plan-replace-hint: "<gray><white><count></white> PNJ existent déjà et n'ont pas été touchés. Ajoute <white>--replace</white> pour les écraser."
+    plan-confirm-hint: "<gray>Rien n'a encore changé. Relance la même commande avec <white>--confirm</white> pour l'appliquer."
+    plan-no-changes: "<gray>Restaurer cette sauvegarde ne changerait rien."
+    # <created> <overwritten>
+    done: "<green><white><created></white> nouveaux PNJ et <white><overwritten></white> PNJ existants ont été restaurés."
+    # <count>
+    partial: "<yellow><count></yellow> PNJ n'ont pas pu être restaurés ; consulte le journal du serveur."
+
 startup:
   # <version> <supported>
   unsupported-version: "<red>Minecraft <white><version></white> n'est pas pris en charge. Cette version prend en charge <white><supported></white>."

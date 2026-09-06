@@ -64,6 +64,17 @@ public final class Permissions {
     /** Force a save. */
     public static final String SAVE = "betternpcs.command.save";
 
+    /** Write a backup, and list the backups that exist. */
+    public static final String BACKUP = "betternpcs.command.backup";
+
+    /**
+     * Restore a backup.
+     *
+     * <p>Separate from {@link #BACKUP}, because taking one is harmless and applying one overwrites
+     * live NPCs.
+     */
+    public static final String RESTORE = "betternpcs.command.restore";
+
     private Permissions() {
         throw new AssertionError("No instances");
     }

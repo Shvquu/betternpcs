@@ -282,6 +282,75 @@ public enum Message {
     /** Placeholders: none. */
     STATE_DESPAWNED("npc.state.despawned", "<gray>despawned"),
 
+    // --- Backup and restore ------------------------------------------------------------------
+
+    /** Placeholders: {@code count}, {@code file}. */
+    BACKUP_CREATED("backup.created",
+            "<green>Backed up <white><count></white> NPCs to <white><file></white>."),
+
+    /** Placeholders: {@code error}. */
+    BACKUP_FAILED("backup.failed",
+            "<red>The backup could not be written: <white><error></white>"),
+
+    /** Placeholders: {@code input}. */
+    BACKUP_NAME_INVALID("backup.name-invalid",
+            "<red>'<white><input></white>' is not a usable backup name. "
+                    + "Use letters, digits, <white>.</white>, <white>-</white> and <white>_</white>."),
+
+    /** Placeholders: {@code count}. */
+    BACKUP_LIST_HEADER("backup.list-header",
+            "<gray>Backups <dark_gray>(<white><count></white>, newest first)"),
+
+    /** Placeholders: {@code file}. */
+    BACKUP_LIST_ENTRY("backup.list-entry",
+            "<dark_gray> <gray><file>"),
+
+    /** Placeholders: none. */
+    BACKUP_LIST_EMPTY("backup.list-empty",
+            "<gray>There are no backups yet. Take one with <white>/npc backup</white>."),
+
+    /** Placeholders: {@code file}. */
+    BACKUP_NOT_FOUND("backup.not-found",
+            "<red>There is no backup called <white><file></white>."),
+
+    /** Placeholders: {@code file}, {@code error}. */
+    BACKUP_UNREADABLE("backup.unreadable",
+            "<red><white><file></white> could not be read: <white><error></white>"),
+
+    /** Placeholders: {@code file}, {@code created}, {@code overwritten}, {@code blocked}. */
+    RESTORE_PLAN_HEADER("backup.restore.plan-header",
+            "<gray>Restoring <white><file></white> would create <white><created></white>, "
+                    + "overwrite <white><overwritten></white> and skip <white><blocked></white>."),
+
+    /** Placeholders: {@code npc}. */
+    RESTORE_BLOCKED_NAME_TAKEN("backup.restore.blocked-name-taken",
+            "<dark_gray> <yellow><npc> <gray>· a different NPC already uses that name"),
+
+    /** Placeholders: {@code npc}. */
+    RESTORE_BLOCKED_UNUSABLE("backup.restore.blocked-unusable",
+            "<dark_gray> <yellow><npc> <gray>· that is not a usable NPC name"),
+
+    /** Placeholders: {@code count}. */
+    RESTORE_PLAN_REPLACE_HINT("backup.restore.plan-replace-hint",
+            "<gray><white><count></white> NPCs already exist and were left alone. "
+                    + "Add <white>--replace</white> to overwrite them."),
+
+    /** Placeholders: none. */
+    RESTORE_PLAN_CONFIRM_HINT("backup.restore.plan-confirm-hint",
+            "<gray>Nothing has changed yet. Run the same command with <white>--confirm</white> to apply it."),
+
+    /** Placeholders: none. */
+    RESTORE_PLAN_NO_CHANGES("backup.restore.plan-no-changes",
+            "<gray>Restoring that backup would change nothing."),
+
+    /** Placeholders: {@code created}, {@code overwritten}. */
+    RESTORE_DONE("backup.restore.done",
+            "<green>Restored <white><created></white> new and <white><overwritten></white> existing NPCs."),
+
+    /** Placeholders: {@code count}. */
+    RESTORE_PARTIAL("backup.restore.partial",
+            "<yellow><count></yellow> NPCs could not be restored; see the server log."),
+
     // --- Startup -----------------------------------------------------------------------------
 
     /** Placeholders: {@code version}, {@code supported}. */

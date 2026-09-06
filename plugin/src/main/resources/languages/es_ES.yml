@@ -147,6 +147,39 @@ npc:
     spawned: "<green>apareciendo"
     despawned: "<gray>sin aparecer"
 
+backup:
+  # <count> <file>
+  created: "<green>Se han copiado <white><count></white> NPCs a <white><file></white>."
+  # <error>
+  failed: "<red>No se pudo escribir la copia de seguridad: <white><error></white>"
+  # <input>
+  name-invalid: "<red>'<white><input></white>' no es un nombre válido para una copia. Usa letras, dígitos, <white>.</white>, <white>-</white> y <white>_</white>."
+  # <count>
+  list-header: "<gray>Copias de seguridad <dark_gray>(<white><count></white>, la más reciente primero)"
+  # <file>
+  list-entry: "<dark_gray> <gray><file>"
+  list-empty: "<gray>Todavía no hay copias de seguridad. Crea una con <white>/npc backup</white>."
+  # <file>
+  not-found: "<red>No existe ninguna copia llamada <white><file></white>."
+  # <file> <error>
+  unreadable: "<red>No se pudo leer <white><file></white>: <white><error></white>"
+
+  restore:
+    # <file> <created> <overwritten> <blocked>
+    plan-header: "<gray>Restaurar <white><file></white> crearía <white><created></white> NPCs, sobrescribiría <white><overwritten></white> y omitiría <white><blocked></white>."
+    # <npc>
+    blocked-name-taken: "<dark_gray> <yellow><npc> <gray>· otro NPC ya usa ese nombre"
+    # <npc>
+    blocked-unusable: "<dark_gray> <yellow><npc> <gray>· ese no es un nombre de NPC válido"
+    # <count>
+    plan-replace-hint: "<gray><white><count></white> NPCs ya existen y no se han tocado. Añade <white>--replace</white> para sobrescribirlos."
+    plan-confirm-hint: "<gray>Todavía no ha cambiado nada. Ejecuta el mismo comando con <white>--confirm</white> para aplicarlo."
+    plan-no-changes: "<gray>Restaurar esa copia no cambiaría nada."
+    # <created> <overwritten>
+    done: "<green>Se han restaurado <white><created></white> NPCs nuevos y <white><overwritten></white> existentes."
+    # <count>
+    partial: "<yellow><count></yellow> NPCs no se pudieron restaurar; consulta el registro del servidor."
+
 startup:
   # <version> <supported>
   unsupported-version: "<red>Minecraft <white><version></white> no es compatible. Esta versión admite <white><supported></white>."

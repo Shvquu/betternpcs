@@ -146,6 +146,39 @@ npc:
     spawned: "<green>spawned"
     despawned: "<gray>despawned"
 
+backup:
+  # <count> <file>
+  created: "<green>Backed up <white><count></white> NPCs to <white><file></white>."
+  # <error>
+  failed: "<red>The backup could not be written: <white><error></white>"
+  # <input>
+  name-invalid: "<red>'<white><input></white>' is not a usable backup name. Use letters, digits, <white>.</white>, <white>-</white> and <white>_</white>."
+  # <count>
+  list-header: "<gray>Backups <dark_gray>(<white><count></white>, newest first)"
+  # <file>
+  list-entry: "<dark_gray> <gray><file>"
+  list-empty: "<gray>There are no backups yet. Take one with <white>/npc backup</white>."
+  # <file>
+  not-found: "<red>There is no backup called <white><file></white>."
+  # <file> <error>
+  unreadable: "<red><white><file></white> could not be read: <white><error></white>"
+
+  restore:
+    # <file> <created> <overwritten> <blocked>
+    plan-header: "<gray>Restoring <white><file></white> would create <white><created></white>, overwrite <white><overwritten></white> and skip <white><blocked></white>."
+    # <npc>
+    blocked-name-taken: "<dark_gray> <yellow><npc> <gray>· a different NPC already uses that name"
+    # <npc>
+    blocked-unusable: "<dark_gray> <yellow><npc> <gray>· that is not a usable NPC name"
+    # <count>
+    plan-replace-hint: "<gray><white><count></white> NPCs already exist and were left alone. Add <white>--replace</white> to overwrite them."
+    plan-confirm-hint: "<gray>Nothing has changed yet. Run the same command with <white>--confirm</white> to apply it."
+    plan-no-changes: "<gray>Restoring that backup would change nothing."
+    # <created> <overwritten>
+    done: "<green>Restored <white><created></white> new and <white><overwritten></white> existing NPCs."
+    # <count>
+    partial: "<yellow><count></yellow> NPCs could not be restored; see the server log."
+
 startup:
   # <version> <supported>
   unsupported-version: "<red>Minecraft <white><version></white> is not supported. This build supports <white><supported></white>."

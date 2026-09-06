@@ -1,6 +1,8 @@
 package dev.shvquu.betternpcs.plugin.command;
 
 import dev.shvquu.betternpcs.api.action.ActionRegistry;
+import dev.shvquu.betternpcs.core.backup.BackupService;
+import dev.shvquu.betternpcs.core.backup.RestoreService;
 import dev.shvquu.betternpcs.core.engine.Scheduler;
 import dev.shvquu.betternpcs.core.i18n.Message;
 import dev.shvquu.betternpcs.core.i18n.MessageService;
@@ -57,7 +59,9 @@ public final class NpcCommands {
             new HelpEntry("/npc action <npc> remove <interaction> <index>", Permissions.ACTION),
             new HelpEntry("/npc action <npc> clear <interaction>", Permissions.ACTION),
             new HelpEntry("/npc save", Permissions.SAVE),
-            new HelpEntry("/npc reload", Permissions.RELOAD));
+            new HelpEntry("/npc reload", Permissions.RELOAD),
+            new HelpEntry("/npc backup [name]", Permissions.BACKUP),
+            new HelpEntry("/npc restore [file] [--replace] [--confirm]", Permissions.RESTORE));
 
     private record HelpEntry(String usage, String permission) {
     }
@@ -69,6 +73,7 @@ public final class NpcCommands {
     private final PositionCommands position;
     private final AppearanceCommands appearance;
     private final ActionCommands actions;
+    private final BackupCommands backups;
 
     /**
      * Creates the command tree builder.
@@ -77,6 +82,8 @@ public final class NpcCommands {
      * @param messages       the message service
      * @param scheduler      used to return to the main thread after asynchronous work
      * @param actionRegistry where action handlers are looked up
+     * @param backupService  writes and lists backups
+     * @param restoreService applies a backup
      * @param reloadPlugin   reloads the configuration and languages
      * @throws NullPointerException if any argument is {@code null}
      */
@@ -85,6 +92,8 @@ public final class NpcCommands {
             MessageService messages,
             Scheduler scheduler,
             ActionRegistry actionRegistry,
+            BackupService backupService,
+            RestoreService restoreService,
             Runnable reloadPlugin) {
 
         this.messages = Objects.requireNonNull(messages, "messages");
@@ -94,6 +103,7 @@ public final class NpcCommands {
         this.position = new PositionCommands(support);
         this.appearance = new AppearanceCommands(support);
         this.actions = new ActionCommands(support, actionRegistry);
+        this.backups = new BackupCommands(support, backupService, restoreService);
     }
 
     /**
@@ -137,6 +147,8 @@ public final class NpcCommands {
                 .then(appearance.skin())
                 .then(appearance.equipment())
                 .then(actions.action())
+                .then(backups.backup())
+                .then(backups.restore())
                 .build();
     }
 
