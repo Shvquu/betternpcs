@@ -27,9 +27,12 @@ does not imply an API change, and API breaking changes only happen on an API maj
 - **Anonymous metrics** through bStats, honouring `plugin.metrics`. NPC count, storage type,
   Minecraft version, adapter, language and whether PlaceholderAPI is hooked — no player data, no
   world or NPC names.
-- **Commands**: `/npc` with 19 subcommands built on Paper's Brigadier API, with tab completion and
+- **Commands**: `/npc` with 21 subcommands built on Paper's Brigadier API, with tab completion and
   per-subcommand permissions.
-- **Permissions**: 14 nodes, all defaulting to operator, with `betternpcs.admin` as their parent.
+- **Permissions**: 16 nodes, all defaulting to operator, with `betternpcs.admin` as their parent.
+- **Backup and restore**: `/npc backup` writes every NPC to readable JSON under
+  `plugins/BetterNPCs/backups/`; `/npc restore` reads one back. The file is backend-independent, so
+  a backup taken on SQLite restores into MongoDB.
 - **Localisation**: English, German, Spanish and French, all messages MiniMessage.
 - **Actions**: twelve built-in handlers — messages, broadcasts, action bars, titles, player and
   console commands, sounds, particles, teleports, animations, permission gates and cooldowns.
@@ -48,5 +51,9 @@ does not imply an API change, and API breaking changes only happen on an API maj
 - Database credentials and MongoDB connection strings are redacted from every log line, exception
   message and `toString`.
 - The SQLite file name is refused if it contains a path traversal or an absolute path.
+- A backup name is checked against a whitelist and the resolved path is checked again afterwards, so
+  a name typed at the console cannot read or write a file outside the backups folder.
+- `/npc restore` is a dry run unless `--confirm` is given, and never deletes an NPC the backup does
+  not mention.
 
 [Unreleased]: https://github.com/Shvquu/betternpcs/commits/main

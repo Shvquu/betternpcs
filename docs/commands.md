@@ -190,3 +190,76 @@ backend and reloading logs a warning saying exactly that.
 
 Reloading invalidates every NPC handle, including ones other plugins are holding. Extensions should
 look their NPCs up again after `NpcLoadEvent`.
+
+---
+
+## Backup and restore
+
+Backups are plain JSON under `plugins/BetterNPCs/backups/`. They hold every NPC in full — position,
+skin, equipment, actions, metadata, the lot — and nothing else: no configuration, no language files.
+
+The format is the same document the database stores, so a backup taken on SQLite restores into
+MongoDB without conversion, and a backup taken before a new NPC property existed still restores
+afterwards, with the missing field taking its default.
+
+### `/npc backup [name]`
+`betternpcs.command.backup`
+
+Writes every NPC to `backups/<name>.json`. Without a name the file is named after the moment it was
+taken, so repeated backups never overwrite each other.
+
+A name may contain letters, digits, `.`, `-` and `_`. Anything that could reach outside the backups
+folder is refused.
+
+Backing up a named file **overwrites** an existing one of that name. The file is written to a
+temporary file and moved into place, so an interrupted backup leaves the previous one intact rather
+than a truncated file that looks like a backup and is not one.
+
+### `/npc restore`
+`betternpcs.command.restore`
+
+Lists the backups that exist, newest first.
+
+### `/npc restore <file> [--replace] [--confirm]`
+`betternpcs.command.restore`
+
+**Without `--confirm` this is a dry run.** It reports what would be created, what would be
+overwritten and what would be skipped, and changes nothing. Add `--confirm` to apply the same
+command.
+
+**Restore never deletes anything.** An NPC that is on the server but not in the backup is left
+completely alone. A restore is usually run in a hurry by somebody who is not certain what the file
+contains, and a command that silently deleted whatever the backup happened not to mention would turn
+a partial loss into a total one.
+
+Given that, each entry in the file goes one of three ways:
+
+| Situation | Default | With `--replace` |
+| --- | --- | --- |
+| No NPC with that unique id | created | created |
+| The same NPC still exists | skipped, reported | overwritten in place |
+| A **different** NPC holds that name | skipped, reported | skipped, reported |
+
+The last row is not a bug. Giving the name to the NPC from the file would mean taking it from the one
+that has it, and restore does not delete. Rename one of them and restore again.
+
+Overwriting keeps the unique id, so an extension holding a reference to that NPC keeps resolving it.
+
+`--replace` and `--confirm` are separate on purpose: one decides whether existing NPCs are touched,
+the other whether anything happens at all. Both may be given in either order.
+
+### Restoring a single NPC
+
+There is no per-NPC restore. The backup is readable JSON, so the way to do it is to copy the one
+`npcs` entry into a new file and restore that.
+
+### Editing a backup by hand
+
+It is a plain text file and editing it works. One thing to know before you do: **a value the plugin
+does not recognise is replaced by the default rather than reported.** That is what makes a backup
+taken on an older version restore on a newer one, but it also means a typo in an enum — writing
+`NEAREST_PLAYER` where the value is `LOOK_AT_NEAREST_PLAYER` — silently yields `NONE` instead of an
+error.
+
+So check the result with `/npc info <name>` after restoring a file you edited. The dry run will not
+catch it: it validates names and identity, not the contents of `data`.

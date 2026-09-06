@@ -48,6 +48,8 @@ permissions:
       betternpcs.command.action.console: true
       betternpcs.command.reload: true
       betternpcs.command.save: true
+      betternpcs.command.backup: true
+      betternpcs.command.restore: true
 
   betternpcs.command:
     description: Use /npc at all. Without it the command is not even offered in tab completion.
@@ -101,4 +103,14 @@ permissions:
 
   betternpcs.command.save:
     description: Force a save of every changed NPC.
+    default: op
+
+  betternpcs.command.backup:
+    description: Write a backup of every NPC, and list the backups that exist.
+    default: op
+
+  betternpcs.command.restore:
+    description: >-
+      Restore a backup. Separate from betternpcs.command.backup because taking one is harmless and
+      applying one overwrites live NPCs.
     default: op

@@ -77,6 +77,19 @@ public final class CommandSupport {
     }
 
     /**
+     * Runs work off the main server thread.
+     *
+     * <p>For the blocking parts of a command — reading and writing backup files, mostly. Anything
+     * that then touches NPC state has to come back through {@link #onMain(Runnable)}; sending a
+     * message does not.
+     *
+     * @param work what to run
+     */
+    public void async(Runnable work) {
+        scheduler.runAsync(work);
+    }
+
+    /**
      * Returns the NPC manager.
      *
      * @return the manager
