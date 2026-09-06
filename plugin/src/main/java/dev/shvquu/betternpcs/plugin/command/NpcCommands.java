@@ -12,6 +12,7 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BooleanSupplier;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -74,6 +75,7 @@ public final class NpcCommands {
     private final AppearanceCommands appearance;
     private final ActionCommands actions;
     private final BackupCommands backups;
+    private final BooleanSupplier enabled;
 
     /**
      * Creates the command tree builder.
@@ -84,6 +86,8 @@ public final class NpcCommands {
      * @param actionRegistry where action handlers are looked up
      * @param backupService  writes and lists backups
      * @param restoreService applies a backup
+     * @param enabled        whether the plugin is still enabled; every subcommand is hidden and
+     *                       refused when it is not
      * @param reloadPlugin   reloads the configuration and languages
      * @throws NullPointerException if any argument is {@code null}
      */
@@ -94,9 +98,11 @@ public final class NpcCommands {
             ActionRegistry actionRegistry,
             BackupService backupService,
             RestoreService restoreService,
+            BooleanSupplier enabled,
             Runnable reloadPlugin) {
 
         this.messages = Objects.requireNonNull(messages, "messages");
+        this.enabled = Objects.requireNonNull(enabled, "enabled");
         this.support = new CommandSupport(manager, messages, scheduler);
         this.lifecycle = new LifecycleCommands(support, reloadPlugin);
         this.query = new QueryCommands(support);
@@ -123,7 +129,14 @@ public final class NpcCommands {
 
     private com.mojang.brigadier.tree.LiteralCommandNode<CommandSourceStack> build() {
         return Commands.literal("npc")
-                .requires(source -> source.getSender().hasPermission(Permissions.COMMAND))
+                // The enabled check is not belt-and-braces. A plugin disabled at runtime — which
+                // `updates.disable-on-update` does deliberately — keeps its Brigadier tree
+                // registered on the versions this project supports, and `/npc list` was observed
+                // still answering from a torn-down engine with the connection pool already closed.
+                // Guarding the root covers the whole subtree: Brigadier will not descend into a node
+                // it may not use, so every subcommand goes with it.
+                .requires(source -> enabled.getAsBoolean()
+                        && source.getSender().hasPermission(Permissions.COMMAND))
                 // Bare /npc shows the help, which is what someone who has forgotten the syntax types.
                 .executes(context -> help(context.getSource().getSender()))
                 .then(Commands.literal("help")

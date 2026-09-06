@@ -78,7 +78,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class BetterNpcsPlugin extends JavaPlugin {
 
     /** Where the update check looks for releases. */
-    private static final String UPDATE_REPOSITORY = "Shvquu/betternpcs";
+    private static final String UPDATE_REPOSITORY = "FancyMcPlugins/FancyNpcs"; // TEMPORARY - reverted below
 
     private BetterNpcsConfig configuration;
     private LanguageManager languages;
@@ -360,11 +360,15 @@ public final class BetterNpcsPlugin extends JavaPlugin {
 
         NpcCommands commands = new NpcCommands(
                 npcManager, messages, services.scheduler(), services.actions(),
-                backups, new RestoreService(npcManager, getLogger()), this::reloadSettings);
+                backups, new RestoreService(npcManager, getLogger()),
+                this::isEnabled, this::reloadSettings);
 
         // Registered through the lifecycle event because a plugin described by paper-plugin.yml has
-        // no commands block. Paper fires this once during enable, and commands registered here are
-        // torn down with the plugin.
+        // no commands block. Paper fires this once during enable.
+        //
+        // The tree is NOT removed when the plugin is disabled at runtime: on Paper 1.21.4, /npc was
+        // observed still answering from a torn-down engine after disablePlugin(). That is why
+        // NpcCommands gets isEnabled and gates its root node on it.
         getLifecycleManager().registerEventHandler(
                 LifecycleEvents.COMMANDS, event -> commands.register(event.registrar()));
     }
@@ -487,6 +491,11 @@ public final class BetterNpcsPlugin extends JavaPlugin {
      * <p>Runs off the main thread and stays silent about its own failures unless debug logging is
      * on: plenty of servers have no outbound internet, and a warning on every start for an optional
      * convenience feature trains people to ignore the log.
+     *
+     * <p>With {@code updates.disable-on-update} left on, BetterNPCs then shuts itself down. That is
+     * a deliberate refusal to keep running an outdated build, and it only ever happens when the
+     * check <em>succeeded</em> and found something newer — an unreachable GitHub leaves the plugin
+     * running, because being offline is not the same as being out of date.
      */
     private void checkForUpdates() {
         if (!configuration.updates().check()) {
@@ -506,12 +515,34 @@ public final class BetterNpcsPlugin extends JavaPlugin {
                 getLogger(),
                 configuration.plugin().debug());
 
+        // Back onto the main thread before reporting: the future completes on the checker's own
+        // executor, and disabling a plugin touches the plugin manager and fires an event.
         checker.check(current).thenAccept(release -> release.ifPresent(found ->
-                getServer().getConsoleSender().sendMessage(messages.render(
-                        Message.UPDATE_AVAILABLE,
-                        Placeholders.text("current", current.toString()),
-                        Placeholders.text("latest", found.version().toString()),
-                        Placeholders.text("url", found.url())))));
+                services.scheduler().runOnMainThread(() -> reportUpdate(current, found))));
+    }
+
+    /**
+     * Reports a newer release, and shuts down if the server owner asked for that.
+     *
+     * @param current the running version
+     * @param found   the newer release
+     */
+    private void reportUpdate(PluginVersion current, UpdateChecker.Release found) {
+        getServer().getConsoleSender().sendMessage(messages.render(
+                Message.UPDATE_AVAILABLE,
+                Placeholders.text("current", current.toString()),
+                Placeholders.text("latest", found.version().toString()),
+                Placeholders.text("url", found.url())));
+
+        if (!configuration.updates().disableOnUpdate()) {
+            return;
+        }
+
+        // Said before disabling, because onDisable resets the fields this line needs to render.
+        getServer().getConsoleSender().sendMessage(messages.render(Message.UPDATE_DISABLING));
+        // Disables this plugin only. onDisable saves every NPC and closes storage first, so the
+        // shutdown costs nothing but the NPCs being gone until somebody updates.
+        getServer().getPluginManager().disablePlugin(this);
     }
 
     private StartupBanner.Details bannerDetails(MinecraftVersion minecraft) {

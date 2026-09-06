@@ -184,3 +184,4 @@ startup:
   unsupported-version: "<red>Minecraft <white><version></white> is not supported. This build supports <white><supported></white>."
   # <current> <latest> <url>
   update-available: "<yellow>BetterNPCs <white><latest></white> is out; you are running <white><current></white>. Download: <white><url></white>"
+  update-disabling: "<red>Disabling BetterNPCs because a newer release is available. NPCs have been saved. Update, or set <white>updates.disable-on-update: false</white> in config.yml to keep running this version."

@@ -313,16 +313,19 @@ public record BetterNpcsConfig(
      * has no mechanism to replace itself: a plugin that updates itself is a plugin that can break a
      * server while nobody is watching.
      *
-     * @param check whether to look for a newer release at startup
+     * @param check           whether to look for a newer release at startup
+     * @param disableOnUpdate whether to shut BetterNPCs down after reporting one
      * @since 1.0.0
      */
-    public record Updates(boolean check) {
+    public record Updates(boolean check, boolean disableOnUpdate) {
 
-        /** Checking enabled. */
-        public static final Updates DEFAULT = new Updates(true);
+        /** Checking enabled, and shutting down when a newer release is found. */
+        public static final Updates DEFAULT = new Updates(true, true);
 
         static Updates load(ConfigReader reader) {
-            return new Updates(reader.bool("check", DEFAULT.check()));
+            return new Updates(
+                    reader.bool("check", DEFAULT.check()),
+                    reader.bool("disable-on-update", DEFAULT.disableOnUpdate()));
         }
     }
 }

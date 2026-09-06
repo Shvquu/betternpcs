@@ -360,7 +360,13 @@ public enum Message {
     /** Placeholders: {@code current}, {@code latest}, {@code url}. */
     UPDATE_AVAILABLE("startup.update-available",
             "<yellow>BetterNPCs <white><latest></white> is out; you are running <white><current></white>. "
-                    + "Download: <white><url></white>");
+                    + "Download: <white><url></white>"),
+
+    /** Placeholders: none. */
+    UPDATE_DISABLING("startup.update-disabling",
+            "<red>Disabling BetterNPCs because a newer release is available. NPCs have been saved. "
+                    + "Update, or set <white>updates.disable-on-update: false</white> in config.yml "
+                    + "to keep running this version.");
 
     private static final Map<String, Message> BY_KEY = index();
 

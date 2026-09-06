@@ -124,3 +124,16 @@ updates:
   # BetterNPCs never downloads or installs anything: a plugin that replaces itself is a plugin that
   # can break a server while nobody is watching.
   check: true
+
+  # Shuts BetterNPCs down immediately after reporting that a newer release exists.
+  #
+  # The intent is that nobody keeps running an old build without noticing. Be aware of what it
+  # means in practice: every NPC disappears the moment a release is published upstream, on every
+  # server, whether or not anything was actually wrong with the version you are running. NPCs are
+  # saved first — onDisable writes everything out — so nothing is lost, but they are gone until
+  # somebody updates or sets this to false.
+  #
+  # Nothing else on the server is affected: only BetterNPCs is disabled.
+  #
+  # Has no effect when `check` is false, because then nothing is ever found.
+  disable-on-update: true
