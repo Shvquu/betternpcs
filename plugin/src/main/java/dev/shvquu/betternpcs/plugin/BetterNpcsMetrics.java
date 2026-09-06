@@ -36,11 +36,10 @@ final class BetterNpcsMetrics {
     /**
      * The bStats project id.
      *
-     * <p><b>Placeholder.</b> Register the plugin at <a
-     * href="https://bstats.org/getting-started">bstats.org/getting-started</a> and put the id here.
-     * Until then {@link #PLUGIN_ID} is {@code 0} and metrics stay switched off regardless of the
-     * configuration — submitting to a project that does not exist would be pointless traffic from
-     * every server running this build.
+     * <p>Set to {@code 0} in a fork that has not registered its own project at <a
+     * href="https://bstats.org/getting-started">bstats.org</a>. Metrics then stay switched off
+     * whatever the configuration says, and the reason is logged — submitting to a project that does
+     * not exist would be pointless traffic from every server running that build.
      */
     private static final int PLUGIN_ID = 33885;
 
