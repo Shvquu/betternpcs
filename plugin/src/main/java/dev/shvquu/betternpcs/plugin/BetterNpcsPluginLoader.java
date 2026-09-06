@@ -106,6 +106,7 @@ public final class BetterNpcsPluginLoader implements PluginLoader {
             case "MYSQL" -> List.of("mysql");
             case "MARIADB" -> List.of("mariadb");
             case "POSTGRESQL" -> List.of("postgresql");
+            case "MONGODB" -> List.of("mongodb");
             default -> List.of();
         };
     }

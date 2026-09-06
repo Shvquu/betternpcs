@@ -39,6 +39,7 @@ import dev.shvquu.betternpcs.core.version.UnsupportedMinecraftVersionException;
 import dev.shvquu.betternpcs.core.version.VersionAdapter;
 import dev.shvquu.betternpcs.core.version.VersionAdapterResolver;
 import dev.shvquu.betternpcs.plugin.command.NpcCommands;
+import dev.shvquu.betternpcs.storage.mongodb.MongoRepositoryFactory;
 import dev.shvquu.betternpcs.storage.sql.SqlRepositoryFactory;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import java.io.IOException;
@@ -131,6 +132,14 @@ public final class BetterNpcsPlugin extends JavaPlugin {
         StartupBanner.render(bannerDetails(minecraft)).forEach(getLogger()::info);
         logRegisteredPermissions();
         checkForUpdates();
+
+        BetterNpcsMetrics.start(
+                this,
+                this::configuration,
+                npcManager,
+                repository,
+                adapter.describe(),
+                languages.defaultBundle().locale());
 
         loadNpcs();
         startTasks();
@@ -228,10 +237,13 @@ public final class BetterNpcsPlugin extends JavaPlugin {
 
     private NpcRepository openStorage() {
         try {
-            NpcRepository sql = SqlRepositoryFactory.create(
-                    configuration.storage(), getDataFolder().toPath(), getLogger());
-            sql.initialize().join();
-            return sql;
+            NpcRepository backend = switch (configuration.storage().type().family()) {
+                case SQL -> SqlRepositoryFactory.create(
+                        configuration.storage(), getDataFolder().toPath(), getLogger());
+                case DOCUMENT -> MongoRepositoryFactory.create(configuration.storage(), getLogger());
+            };
+            backend.initialize().join();
+            return backend;
         } catch (RuntimeException failure) {
             // CompletionException from join() is a RuntimeException, so this covers both a pool that
             // could not connect and a migration that failed.
@@ -239,7 +251,7 @@ public final class BetterNpcsPlugin extends JavaPlugin {
             // refuses to start at all — and the warning is loud enough that nobody misses it.
             getLogger().log(Level.SEVERE, failure, () ->
                     "Could not open the "
-                            + SqlRepositoryFactory.describe(configuration.storage())
+                            + configuration.storage().describe()
                             + " backend. BetterNPCs will run WITHOUT PERSISTENCE for this session: "
                             + "NPCs can be created and used, but nothing will be saved.");
             return new InMemoryNpcRepository();
@@ -371,7 +383,7 @@ public final class BetterNpcsPlugin extends JavaPlugin {
         messages = new MiniMessageService(languages, placeholderExpander());
         configuration = reloaded;
 
-        if (!repository.describe().equals(SqlRepositoryFactory.describe(reloaded.storage()))) {
+        if (!repository.describe().equals(reloaded.storage().describe())) {
             getLogger().warning("The storage backend was changed in config.yml. That only takes "
                     + "effect after a restart; NPCs are still being saved to " + repository.describe() + ".");
         }
