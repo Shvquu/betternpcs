@@ -1,0 +1,80 @@
+####################################################################################################
+# Builds and tests every push to main and every pull request.
+#
+# The expensive part of this build is not compiling BetterNPCs — it is paperweight deriving six
+# Mojang-mapped server jars, one per supported Minecraft version, at roughly thirty seconds each
+# plus the download. Both caches below exist for that, and the paperweight one is keyed so that it
+# is invalidated exactly when a dev bundle coordinate changes and not before.
+####################################################################################################
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A second push to the same branch makes the first one irrelevant. Cancelling it frees a runner
+# rather than spending five minutes producing a result nobody will look at.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Both toolchains, installed rather than left to the foojay resolver to download. The 26.x
+      # adapters need a JDK 25 to read their class files; everything else targets 21. Installing
+      # them here keeps the run reproducible and saves a download the resolver would repeat.
+      - name: Set up JDK 21 and 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            21
+            25
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # paperweight caches its remapped server jars per module, about 40 MB each. The key is a hash
+      # of the version modules' build scripts, because that is where the dev bundle coordinate that
+      # defines each one lives — so the cache is rebuilt when a Minecraft version is added or
+      # bumped, and reused every other time.
+      - name: Cache remapped server jars
+        uses: actions/cache@v4
+        with:
+          path: versions/*/.gradle/caches/paperweight
+          key: paperweight-${{ runner.os }}-${{ hashFiles('versions/*/build.gradle.kts') }}
+          restore-keys: paperweight-${{ runner.os }}-
+
+      - name: Build
+        run: ./gradlew build --stacktrace
+
+      # Uploaded only on failure: on a green run nobody opens them, and they are several megabytes
+      # of HTML.
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            **/build/reports/tests/
+            **/build/test-results/
+          retention-days: 7
+
+      - name: Upload plugin jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: BetterNPCs
+          path: plugin/build/libs/BetterNPCs-*.jar
+          if-no-files-found: error
+          retention-days: 14

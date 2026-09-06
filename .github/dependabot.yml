@@ -1,0 +1,66 @@
+####################################################################################################
+# Dependency updates.
+#
+# TWO IGNORE RULES BELOW ARE LOAD-BEARING. They are not tidiness or noise reduction — bumping either
+# of those dependencies automatically breaks an architectural invariant, and the breakage is quiet.
+# Read the comments before removing them.
+####################################################################################################
+
+version: 2
+
+updates:
+  # The version catalogue at gradle/libs.versions.toml, which is where every third-party version in
+  # the project lives.
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+    groups:
+      # Test libraries move together and are reviewed together; five separate pull requests for
+      # them would be five separate CI runs of a build that remaps six server jars.
+      test-libraries:
+        patterns:
+          - 'org.junit*'
+          - 'org.assertj*'
+          - 'com.tngtech.archunit*'
+      jdbc-drivers:
+        patterns:
+          - 'com.mysql*'
+          - 'org.mariadb*'
+          - 'org.postgresql*'
+          - 'org.xerial*'
+
+    ignore:
+      # paperApi is pinned to the OLDEST supported Minecraft version on purpose. api/ and core/
+      # compile against it so that reaching for something unavailable on 1.21.4 is a compile error
+      # rather than a crash on somebody's server. Bumping it would let newer API into code that has
+      # to run on 1.21.4, and nothing would fail until a user on that version loaded the plugin.
+      #
+      # Raising the supported floor is a deliberate decision: edit the catalogue by hand, drop the
+      # corresponding versions/v* module and update VersionAdapterResolver.
+      - dependency-name: io.papermc.paper:paper-api
+
+      # MockBukkit ships one build per Minecraft version and refuses to start against another, so
+      # its version and paperApiTest have to move as a pair. Dependabot can only see the artifact,
+      # not the pairing, so it would raise one of the two and red-build every engine test.
+      #
+      # Upgrading: read which Paper API the new MockBukkit names, set paperApiTest to match, then
+      # bump both in one commit.
+      - dependency-name: org.mockbukkit.mockbukkit:mockbukkit-v1.21
+
+  # The convention plugins build, which pulls in paperweight.
+  - package-ecosystem: gradle
+    directory: /buildSrc
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    labels: [dependencies, build]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    labels: [dependencies, ci]
