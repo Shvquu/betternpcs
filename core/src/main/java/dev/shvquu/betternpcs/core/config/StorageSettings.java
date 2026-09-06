@@ -73,19 +73,32 @@ public record StorageSettings(
     }
 
     /**
-     * Returns a description safe to log, naming only the active backend.
+     * Returns a one-line description of the active backend, safe to log.
      *
-     * @return the description
+     * <p>Lives here rather than on a factory because it is needed before a backend has been chosen —
+     * by the startup banner, by the reload warning, and by whichever factory ends up building the
+     * repository. Every branch goes through a {@code describeTarget} that strips credentials.
+     *
+     * @return a description such as {@code "SQLITE -> npcs.db"}
      */
-    @Override
-    public String toString() {
+    public String describe() {
         String detail = switch (type) {
             case SQLITE -> sqlite.fileName();
             case MYSQL, MARIADB -> mysql.describeTarget();
             case POSTGRESQL -> postgresql.describeTarget();
             case MONGODB -> mongodb.describeTarget();
         };
-        return "StorageSettings[" + type + " -> " + detail + ']';
+        return type + " -> " + detail;
+    }
+
+    /**
+     * Returns a description safe to log, naming only the active backend.
+     *
+     * @return the description
+     */
+    @Override
+    public String toString() {
+        return "StorageSettings[" + describe() + ']';
     }
 
     /**

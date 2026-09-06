@@ -60,6 +60,19 @@ dependencies {
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+
+    // Escape hatch for the forked test JVM. Needed on machines behind a TLS-intercepting proxy or
+    // antivirus, where a test that downloads something — the embedded mongod, for instance — fails
+    // with a PKIX error:
+    //
+    //   ./gradlew test "-Ptest.jvmArgs=-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT"
+    //
+    // Deliberately opt-in and deliberately on the task rather than the daemon: `org.gradle.jvmargs`
+    // configures the daemon, and tests run in a separate process that never sees it.
+    providers.gradleProperty("test.jvmArgs").orNull
+        ?.split(" ")
+        ?.filter { it.isNotBlank() }
+        ?.let { jvmArgs(it) }
     testLogging {
         events("failed")
         exceptionFormat = TestExceptionFormat.FULL

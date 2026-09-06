@@ -9,6 +9,7 @@ base.archivesName = "BetterNPCs"
 dependencies {
     implementation(project(":core"))
     implementation(project(":storage:sql"))
+    implementation(project(":storage:mongodb"))
     implementation(project(":versions:common"))
 
     // Every adapter ships in the jar; exactly one is class-loaded at runtime, chosen by
@@ -22,6 +23,11 @@ dependencies {
     implementation(project(":versions:v26_2"))
 
     compileOnly(libs.paper.api)
+
+    // Shaded and relocated below rather than downloaded by the plugin loader. bStats requires each
+    // plugin to carry its own relocated copy, so that two plugins bundling different versions cannot
+    // fight over the same classes.
+    implementation(libs.bstats.bukkit)
 
     // The tests here check the *packaged* resources — config.yml and the language files — against
     // the code that reads them. That can only be done from this module, because this is where those
@@ -39,6 +45,7 @@ tasks.processResources {
         "mysqlVersion" to libs.versions.mysqlDriver.get(),
         "mariadbVersion" to libs.versions.mariadbDriver.get(),
         "postgresqlVersion" to libs.versions.postgresqlDriver.get(),
+        "mongodbVersion" to libs.versions.mongodb.get(),
     )
     inputs.properties(tokens)
     filesMatching(listOf("paper-plugin.yml", "betternpcs-libraries.properties")) {
@@ -55,6 +62,10 @@ tasks.shadowJar {
     manifest {
         attributes("paperweight-mappings-namespace" to "mojang")
     }
+
+    // bStats insists on this, and it is right to: without relocation the first plugin to load wins
+    // and every other plugin's metrics silently attach to its configuration instead.
+    relocate("org.bstats", "dev.shvquu.betternpcs.libs.bstats")
 
     mergeServiceFiles()
 }

@@ -29,6 +29,7 @@ include("api")
 // --- Implementation (GPL-3.0) ---------------------------------------------------------------------
 include("core")
 include("storage:sql")
+include("storage:mongodb")
 include("plugin")
 
 // --- Version adapters -----------------------------------------------------------------------------

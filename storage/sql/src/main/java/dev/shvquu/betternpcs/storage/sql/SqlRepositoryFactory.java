@@ -88,7 +88,7 @@ public final class SqlRepositoryFactory {
         config.setMaximumPoolSize(poolSize);
 
         return new SqlNpcRepository(
-                new HikariDataSource(config), dialect, describe(settings), logger, poolSize);
+                new HikariDataSource(config), dialect, settings.describe(), logger, poolSize);
     }
 
     private static String jdbcUrl(StorageType type, StorageSettings.Jdbc jdbc) {
@@ -102,18 +102,4 @@ public final class SqlRepositoryFactory {
         };
     }
 
-    /**
-     * Returns a description of the configured backend with no credentials in it.
-     *
-     * @param settings the storage settings
-     * @return the description, safe to log
-     */
-    public static String describe(StorageSettings settings) {
-        return switch (settings.type()) {
-            case SQLITE -> "SQLITE -> " + settings.sqlite().fileName();
-            case MYSQL, MARIADB, POSTGRESQL ->
-                    settings.type() + " -> " + settings.activeJdbc().describeTarget();
-            case MONGODB -> "MONGODB -> " + settings.mongodb().describeTarget();
-        };
-    }
 }

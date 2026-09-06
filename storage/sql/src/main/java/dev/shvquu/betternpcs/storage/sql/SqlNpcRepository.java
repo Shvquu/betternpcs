@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import dev.shvquu.betternpcs.api.npc.NpcSnapshot;
 import dev.shvquu.betternpcs.api.npc.property.NpcPosition;
 import dev.shvquu.betternpcs.core.storage.NpcRepository;
+import dev.shvquu.betternpcs.core.storage.SnapshotCodec;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

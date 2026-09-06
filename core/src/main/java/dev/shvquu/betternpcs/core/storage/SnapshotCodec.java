@@ -1,4 +1,4 @@
-package dev.shvquu.betternpcs.storage.sql;
+package dev.shvquu.betternpcs.core.storage;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
