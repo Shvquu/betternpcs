@@ -43,7 +43,7 @@ jobs:
             25
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
 
       # paperweight caches its remapped server jars per module, about 40 MB each. The key is a hash
       # of the version modules' build scripts, because that is where the dev bundle coordinate that
