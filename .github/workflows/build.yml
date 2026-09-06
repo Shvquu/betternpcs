@@ -63,7 +63,7 @@ jobs:
       # of HTML.
       - name: Upload test reports
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-reports
           path: |
@@ -72,7 +72,7 @@ jobs:
           retention-days: 7
 
       - name: Upload plugin jar
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: BetterNPCs
           path: plugin/build/libs/BetterNPCs-*.jar
