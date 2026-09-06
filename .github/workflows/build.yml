@@ -35,7 +35,7 @@ jobs:
       # adapters need a JDK 25 to read their class files; everything else targets 21. Installing
       # them here keeps the run reproducible and saves a download the resolver would repeat.
       - name: Set up JDK 21 and 25
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: |
