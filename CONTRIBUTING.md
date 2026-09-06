@@ -23,6 +23,17 @@ Running the tests alone:
 ./gradlew test
 ```
 
+The MongoDB tests download and start a real `mongod` on first run. Behind a TLS-intercepting proxy
+or antivirus that download fails and those tests **skip with the reason printed** rather than
+failing. The same trust-store workaround as below applies — note that it goes on the *test* JVM,
+because `org.gradle.jvmargs` configures the daemon and tests run in a separate process:
+
+```bash
+./gradlew test "-Ptest.jvmArgs=-Djavax.net.ssl.trustStoreType=WINDOWS-ROOT"
+```
+
+Once the binary is cached locally the workaround is no longer needed.
+
 ## Running a test server
 
 ```bash

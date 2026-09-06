@@ -14,7 +14,7 @@ rendering.
 | MySQL | yes | For sharing NPCs across servers |
 | MariaDB | yes | Same block as MySQL; differs only in the driver |
 | PostgreSQL | yes | |
-| MongoDB | **not yet** | Configurable, not implemented |
+| MongoDB | yes | One document per NPC, same shape as the SQL row |
 | In-memory | yes | Not selectable — the automatic fallback when a backend cannot be opened |
 
 Configuration: [configuration.md](configuration.md#storage).
@@ -58,8 +58,12 @@ Changes mark an NPC dirty rather than writing immediately. A script that moves a
 would otherwise be a database write every tick.
 
 Dirty NPCs are written on a timer (`npc.save-interval`, default 300 s), on `/npc save`, and on
-shutdown. The whole batch goes in **one transaction**: a partial write would leave the database
-describing a state the server was never in.
+shutdown. On the SQL backends the whole batch goes in **one transaction**: a partial write would leave the
+database describing a state the server was never in.
+
+MongoDB cannot promise that on a single node, so the batch is an *ordered* bulk write instead — a
+failure stops it rather than rolling it back, and the writes before the failure stand. That is a
+real difference between the backends and is stated rather than papered over.
 
 The dirty flag is cleared *before* the write, not after — so a change made while the write is in
 flight leaves the NPC dirty again rather than being discarded. If the write fails, the flag is
@@ -94,6 +98,21 @@ Equipment inside `data` is stored with Bukkit's `ItemStack.serializeAsBytes()`, 
 Minecraft's own data version — an item written on one Minecraft version is upgraded rather than
 misread when loaded on a newer one.
 
+### MongoDB
+
+Deliberately the same shape: the columns above become top-level fields of a document in the `npcs`
+collection, keyed by `_id` (the NPC's uuid), and `data` is the same JSON stored as a sub-document
+rather than a string — so it stays readable and queryable in a Mongo shell, which is the one thing a
+document store buys here.
+
+Both backends go through the same `SnapshotCodec`, which is what keeps a database inspection and a
+backup file meaningful regardless of which backend is in use.
+
+There is no schema to migrate, but `initialize()` still creates the unique **case-insensitive** index
+on `name` (collation strength 2). Without it two NPCs could share a name in the database and the
+engine would then refuse to load them — the SQL backends enforce the same rule and the two must not
+disagree.
+
 ### Reading is deliberately tolerant
 
 Every field in the JSON falls back to a default rather than failing. A row written by an older
@@ -127,6 +146,12 @@ out whether it is valid SQL; a mocked connection would happily accept a statemen
 Covered: schema creation, migration idempotence, the unique-name constraint, full round-trip of a
 fully configured NPC, batch rollback, persistence across a reopen, and a deliberately corrupted
 `data` column.
+
+`MongoNpcRepositoryTest` does the same against a **real `mongod`**, downloaded and started by
+flapdoodle — no Docker required. Covered: the unique case-insensitive name index, round-trip of a
+fully configured NPC, batch ordering, and idempotent initialisation. Where the download is not
+possible — an offline machine, or one behind a TLS-intercepting proxy — the tests skip with the
+reason printed rather than failing, because an unavailable download is not a defect in this code.
 
 MySQL, MariaDB and PostgreSQL are exercised only through their dialect definitions at present. Their
 SQL has not been run against a live server; that needs service containers in CI and is not yet set

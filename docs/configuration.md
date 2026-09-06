@@ -35,12 +35,7 @@ the version adapter; see [commands.md](commands.md#npc-reload).
 everything in one file, and handles thousands of NPCs without difficulty. Sharing between servers is
 the one thing it cannot do.
 
-> `MONGODB` is accepted by the configuration but **not yet implemented** — only the SQL backends
-> ship today. Selecting it does not stop the server: the backend fails to open, a `SEVERE` line
-> explains that NPCs will not be persisted this session, and the plugin runs on in-memory storage.
-> That fallback is deliberate and applies to any storage failure, including a database that is
-> simply down — a server that starts with NPCs that do not persist is far more useful than one that
-> refuses to start.
+All five backends ship and work.
 
 Every block below is parsed at startup, not only the active one, so a typo in the MySQL block is
 reported even while SQLite is in use.
@@ -79,6 +74,14 @@ silently turn off transport encryption to the database for everyone who never re
 |---|---|---|
 | `connection-string` | `mongodb://localhost:27017` | May contain credentials; never logged. Only the host and database are ever printed. |
 | `database` | `betternpcs` | |
+
+MongoDB has no connection-pool settings here because the driver manages its own pool, and one more
+knob whose right answer is "leave it alone" is not worth putting in front of a server owner. Put
+pool options in the connection string if you genuinely need them.
+
+One behaviour differs from the SQL backends and is worth knowing: a single-node MongoDB has no
+multi-document transaction, so a batch save that fails part-way leaves the earlier writes in place.
+The SQL backends roll the whole batch back. See [storage.md](storage.md#writes).
 
 ---
 

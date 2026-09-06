@@ -22,6 +22,11 @@ does not imply an API change, and API breaking changes only happen on an API maj
   Mojang-mapped dev bundle.
 - **Storage**: SQLite, MySQL, MariaDB and PostgreSQL through HikariCP, with a versioned migration
   system, transactional batch writes and retry with backoff on transient failures.
+- **MongoDB storage**, storing the same document shape as the SQL backends, with a unique
+  case-insensitive index on the NPC name. Tested against a real `mongod`.
+- **Anonymous metrics** through bStats, honouring `plugin.metrics`. NPC count, storage type,
+  Minecraft version, adapter, language and whether PlaceholderAPI is hooked — no player data, no
+  world or NPC names.
 - **Commands**: `/npc` with 19 subcommands built on Paper's Brigadier API, with tab completion and
   per-subcommand permissions.
 - **Permissions**: 14 nodes, all defaulting to operator, with `betternpcs.admin` as their parent.
