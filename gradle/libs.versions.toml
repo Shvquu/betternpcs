@@ -43,7 +43,7 @@ paperApiTest = "1.21.11-R0.1-SNAPSHOT"
 # --- Runtime libraries ----------------------------------------------------------------------------
 hikari = "7.1.0"
 sqlite = "3.53.4.0"
-mongodb = "5.11.0"
+mongodb = "5.13.0"
 
 # Shaded into the plugin jar and relocated, which is what bStats requires — every plugin carries its
 # own copy so that two plugins cannot fight over one class.
