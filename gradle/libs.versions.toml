@@ -31,14 +31,14 @@ foojay = "1.0.0"
 # --- Compile baseline -----------------------------------------------------------------------------
 # api/ and core/ compile against the OLDEST supported Paper API on purpose: reaching for something
 # that would be missing on 1.21.4 then fails at compile time instead of crashing a user's server.
-paperApi = "1.21.4-R0.1-SNAPSHOT"
+paperApi = "26.3.build.249-stable"
 
 # Used ONLY on test runtime classpaths, and only because MockBukkit ships one build per Minecraft
 # version and refuses to start against a different one. Tests therefore run against a newer API than
 # the code is compiled against, which is the harmless direction: `compileJava` still uses `paperApi`
 # above, so reaching for something missing on 1.21.4 is a compile error either way. Bump this to
 # whatever the MockBukkit release names when upgrading it.
-paperApiTest = "1.21.11-R0.1-SNAPSHOT"
+paperApiTest = "26.3.build.249-stable"
 
 # --- Runtime libraries ----------------------------------------------------------------------------
 hikari = "7.1.0"
